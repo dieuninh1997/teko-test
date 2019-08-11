@@ -4,14 +4,25 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg_gradient_tomato"
-    android:orientation="vertical"
+    android:orientation="horizontal"
     android:paddingHorizontal="11dp"
-    android:paddingVertical="8dp">
+    android:paddingTop="28dp"
+    android:paddingBottom="8dp">
+
+    <ImageButton
+        android:id="@+id/img_back"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_gravity="center"
+        android:layout_marginRight="12dp"
+        android:background="@android:color/transparent"
+        android:src="@mipmap/arrow_back_black" />
 
     <androidx.appcompat.widget.SearchView
         android:id="@+id/searchView"
         android:layout_width="match_parent"
         android:layout_height="32dp"
+        android:layout_gravity="center"
         android:background="@drawable/bg_search_corner"
         app:iconifiedByDefault="false"
         app:queryBackground="@android:color/transparent"

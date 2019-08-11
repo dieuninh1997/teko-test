@@ -11,8 +11,14 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.google.gson.internal.LinkedTreeMap;
+import com.ninhttd.devtest.custom.DialogUtil;
 import com.ninhttd.devtest.custom.LogUtils;
+import com.ninhttd.devtest.data.dto.ErrorDTO;
+import com.ninhttd.devtest.data.remote.exception.HandlerException;
 import com.ninhttd.devtest.utils.KeyboardUtil;
+
+import java.util.ArrayList;
 
 import butterknife.ButterKnife;
 
@@ -64,6 +70,35 @@ public abstract class BaseFragment extends Fragment implements BaseView {
             KeyboardUtil.showKeyboard(getActivity());
         } else {
             KeyboardUtil.hideKeyboard(getActivity());
+        }
+    }
+
+    public void showDialogLoading() {
+        DialogUtil.getInstance(getContext()).showDialogLoading();
+    }
+
+    public void hideDialogLoading() {
+        DialogUtil.getInstance(getContext()).dismissDialog();
+    }
+
+    @Override
+    public void onErrorAPI(ErrorDTO errorDTO) {
+        String messageKey = "";
+        if (errorDTO.getErrors() != null) {
+            if (errorDTO.getErrors() instanceof ArrayList && ((ArrayList) errorDTO.getErrors()).size() == 0) {
+                return;
+            }
+            LinkedTreeMap data = (LinkedTreeMap) errorDTO.getErrors();
+            String firstKey = (String) data.keySet().iterator().next();
+            messageKey = data.get(firstKey).toString().replace("[", "").replace("]", "");
+            HandlerException.showException(getContext(), messageKey);
+        } else {
+            if (errorDTO.getMessage().contains("Unauthenticated")) {
+                messageKey = "Token invalid. Please login again!";
+            } else {
+                messageKey = errorDTO.getMessage();
+            }
+            HandlerException.showException(getContext(), messageKey);
         }
     }
 }

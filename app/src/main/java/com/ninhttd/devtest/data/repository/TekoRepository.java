@@ -2,12 +2,11 @@ package com.ninhttd.devtest.data.repository;
 
 import android.util.Log;
 
+import com.ninhttd.devtest.data.dto.ResponseDTO;
 import com.ninhttd.devtest.data.dto.ResponseListDTO;
-import com.ninhttd.devtest.data.dto.ViewDTO;
 import com.ninhttd.devtest.data.remote.TekoApi;
 import com.ninhttd.devtest.presentation.view.ProductView;
-
-import java.util.List;
+import com.ninhttd.devtest.presentation.view.ProductViewLever1;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -36,8 +35,7 @@ public class TekoRepository {
     }
 
 
-    public Single<ResponseListDTO<ProductView>> getProductList() {
-        Log.e(TAG, "tekoApi.getProductList no params: "+tekoApi.getProductList());
+    public Single<ResponseDTO<ProductViewLever1>> getProductList() {
         return tekoApi.getProductList();
     }
 

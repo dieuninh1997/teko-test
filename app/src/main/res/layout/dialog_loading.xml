@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_gravity="center_horizontal"
+    android:layout_gravity="center"
     android:layout_height="wrap_content">
 
     <ImageView
@@ -11,9 +11,10 @@
         android:background="@drawable/bg_rounded_8dp"
         android:layout_width="72dp"
         android:layout_height="72dp"
-        android:backgroundTint="#80212121"
+        android:backgroundTint="#25212121"
         android:contentDescription="@null"
         android:padding="24dp"
+        android:layout_gravity="center"
         android:src="@drawable/img_loading"
         />
 </LinearLayout>

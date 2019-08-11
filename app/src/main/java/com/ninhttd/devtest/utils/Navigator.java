@@ -61,27 +61,27 @@ public class Navigator {
         }
     }
 
-    public static void removeFragmentInStack(FragmentActivity activity, Fragment target) {
-        activity.getSupportFragmentManager().beginTransaction().remove(target).commit();
-    }
-
-    public static void startActivity(Activity activity, Class target) {
-        LogUtils.infoLog(activity, "Current Activity: " + target.getSimpleName());
-        Intent starter = new Intent(activity, target);
-        activity.startActivity(starter);
-    }
-
-    public static void startActivityWithAnimation(Activity activity, Class target, int amin1, int amin2) {
-        LogUtils.infoLog(activity, "Current Activity: " + target.getSimpleName());
-        Intent starter = new Intent(activity, target);
-        activity.startActivity(starter);
-        activity.overridePendingTransition(amin1, amin2);
-    }
-
-    public static void startActivity(Activity activity, Class target, Bundle bundle) {
-        LogUtils.infoLog(activity, "Current Activity: " + target.getSimpleName());
-        Intent starter = new Intent(activity, target);
-        starter.putExtras(bundle);
-        activity.startActivity(starter);
-    }
+//    public static void removeFragmentInStack(FragmentActivity activity, Fragment target) {
+//        activity.getSupportFragmentManager().beginTransaction().remove(target).commit();
+//    }
+//
+//    public static void startActivity(Activity activity, Class target) {
+//        LogUtils.infoLog(activity, "Current Activity: " + target.getSimpleName());
+//        Intent starter = new Intent(activity, target);
+//        activity.startActivity(starter);
+//    }
+//
+//    public static void startActivityWithAnimation(Activity activity, Class target, int amin1, int amin2) {
+//        LogUtils.infoLog(activity, "Current Activity: " + target.getSimpleName());
+//        Intent starter = new Intent(activity, target);
+//        activity.startActivity(starter);
+//        activity.overridePendingTransition(amin1, amin2);
+//    }
+//
+//    public static void startActivity(Activity activity, Class target, Bundle bundle) {
+//        LogUtils.infoLog(activity, "Current Activity: " + target.getSimpleName());
+//        Intent starter = new Intent(activity, target);
+//        starter.putExtras(bundle);
+//        activity.startActivity(starter);
+//    }
 }

@@ -14,6 +14,7 @@ import com.ninhttd.devtest.data.dto.ResponseListDTO;
 import com.ninhttd.devtest.data.dto.ViewDTO;
 import com.ninhttd.devtest.data.repository.TekoRepository;
 import com.ninhttd.devtest.presentation.view.ProductView;
+import com.ninhttd.devtest.presentation.view.ProductViewLever1;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +31,7 @@ public class ProductViewModel extends BaseViewModel {
     @Inject
     TekoRepository tekoRepository;
 
-    public MutableLiveData<ResponseListDTO<ProductView>> productLD = new MutableLiveData<>();
+    public MutableLiveData<ResponseDTO<ProductViewLever1>> productLD = new MutableLiveData<>();
 
 
     public ProductViewModel(@NonNull Application application) {
@@ -43,9 +44,9 @@ public class ProductViewModel extends BaseViewModel {
         disposable.add(tekoRepository.getProductList()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribeWith(new DisposableSingleObserver<ResponseListDTO<ProductView>>() {
+                .subscribeWith(new DisposableSingleObserver<ResponseDTO<ProductViewLever1>>() {
                     @Override
-                    public void onSuccess(ResponseListDTO<ProductView> viewDTOResponseListDTO) {
+                    public void onSuccess(ResponseDTO<ProductViewLever1> viewDTOResponseListDTO) {
                         Log.e(TAG, "getProductList onSuccess "+ viewDTOResponseListDTO);
                         productLD.postValue(viewDTOResponseListDTO);
                     }

@@ -24,23 +24,7 @@ public class MainActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 //        setContentView(R.layout.activity_main);
-        setStatusBarGradiant(this);
         Navigator.startFragment(this, R.id.screenContainer, new ProductFragment(), false);
-    }
-
-    /**
-     * Making notification bar transparent
-     */
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    public static void setStatusBarGradiant(Activity activity) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            Window window = activity.getWindow();
-            Drawable background = activity.getResources().getDrawable(R.drawable.bg_gradient_tomato);
-            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-            window.setStatusBarColor(activity.getResources().getColor(android.R.color.transparent));
-            window.setNavigationBarColor(activity.getResources().getColor(android.R.color.transparent));
-            window.setBackgroundDrawable(background);
-        }
     }
 
     @Override
