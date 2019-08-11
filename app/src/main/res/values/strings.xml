@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">dev test</string>
+    <string name="product_seacrch_by_keyword">Nhập tên, mã sản phẩm</string>
 </resources>
