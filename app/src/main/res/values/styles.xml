@@ -14,4 +14,27 @@
         <item name="android:windowDrawsSystemBarBackgrounds" tools:targetApi="lollipop">true</item>
         <item name="android:statusBarColor" tools:targetApi="lollipop">@android:color/transparent</item>
     </style>
+
+    <style name="ViewpagerTab" parent="Widget.Design.TabLayout">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">42dp</item>
+        <item name="android:background">#FFFFFF</item>
+        <item name="tabSelectedTextColor">@color/darkGrey</item>
+        <item name="tabTextColor">@color/coolGrey</item>
+        <item name="tabIndicatorHeight">2dp</item>
+        <item name="tabIndicatorColor">@color/tomato</item>
+        <item name="tabTextAppearance">@style/TabItemApprearance</item>
+        <item name="android:elevation">1dp</item>
+        <item name="tabPaddingStart">0dp</item>
+        <item name="tabPaddingEnd">0dp</item>
+        <item name="tabMaxWidth">0dp</item>
+        <item name="tabGravity">fill</item>
+        <item name="tabMode">fixed</item>
+    </style>
+
+    <style name="TabItemApprearance">
+        <item name="android:maxLines">1</item>
+        <item name="android:textSize">13sp</item>
+    </style>
+
 </resources>

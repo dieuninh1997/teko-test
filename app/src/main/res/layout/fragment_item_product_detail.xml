@@ -20,13 +20,22 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
             <!--slider-->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_slider"
+                android:layout_width="match_parent"
+                android:layout_height="327dp"
+                android:clipToPadding="false"
+                android:fitsSystemWindows="true">
 
-            <!--info-->
+            </androidx.recyclerview.widget.RecyclerView>
+
+            <!--separator-->
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="@color/paleGrey" />
 
+            <!--info-->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -127,6 +136,95 @@
                 android:background="@color/paleGrey" />
 
             <!--tabs-->
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tab_layout"
+                style="@style/ViewpagerTab" />
+
+            <androidx.viewpager.widget.ViewPager
+                android:id="@+id/view_pager"
+                android:layout_width="match_parent"
+                android:layout_height="196dp" />
+
+            <!--separator-->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="8dp"
+                android:background="@color/paleGrey" />
+
+            <!--sp cung loai-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:lineHeight="18dp"
+                    android:text="Sản phẩm cùng loại"
+                    android:textColor="@color/coolGrey"
+                    android:textSize="13sp" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_sp_cung_loai"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+            <!--separator-->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="8dp"
+                android:background="@color/paleGrey" />
+
+            <!--cart-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:orientation="horizontal"
+                android:paddingVertical="8dp"
+                android:paddingLeft="16dp"
+                android:paddingRight="8dp">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+                    <ImageButton
+                        android:id="@+id/btn_minus"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@mipmap/remove_circle" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:lineHeight="20dp"
+                        android:text="2"
+                        android:textAlignment="center"
+                        android:textColor="@color/darkGrey"
+                        android:textSize="15sp" />
+
+                    <ImageButton
+                        android:id="@+id/btn_add"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@mipmap/remove_circle" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:background="@drawable/bg_rounded_8dp_gradient"
+                    android:orientation="horizontal"
+                    android:paddingHorizontal="16dp"
+                    android:paddingVertical="12dp">
+
+                </LinearLayout>
+            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 
