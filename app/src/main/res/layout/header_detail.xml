@@ -14,7 +14,7 @@
         android:layout_height="24dp"
         android:layout_gravity="center"
         android:layout_marginRight="12dp"
-        android:background="@android:color/transparent"
+        android:background="?android:attr/selectableItemBackground"
         android:src="@mipmap/arrow_back_white" />
 
     <LinearLayout
