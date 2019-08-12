@@ -1,7 +1,6 @@
 package com.ninhttd.devtest.presentation.product.adapter;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,12 +14,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.ninhttd.devtest.R;
-import com.ninhttd.devtest.data.dto.ViewDTO;
 import com.ninhttd.devtest.presentation.product.ProductDetailFragment;
 import com.ninhttd.devtest.presentation.view.ProductView;
 import com.ninhttd.devtest.utils.Navigator;
-
-import org.w3c.dom.Text;
 
 import java.util.List;
 
@@ -79,6 +75,12 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
     @Override
     public int getItemCount() {
         return data.size();
+    }
+
+    public void appendData(List<ProductView> products) {
+        int beforeSize = data.size();
+        data.addAll(products);
+        notifyItemRangeInserted(beforeSize-1,products.size());
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

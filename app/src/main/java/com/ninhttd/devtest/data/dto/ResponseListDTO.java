@@ -5,16 +5,6 @@ import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
 
-public class ResponseListDTO<DTO> extends StatusDTO {
+public class ResponseListDTO<DTO> extends ResponseDTO<List<DTO>> {
 
-    private List<DTO> results;
-
-
-    public List<DTO> getResults() {
-        return results;
-    }
-
-    public void setResults(List<DTO> results) {
-        this.results = results;
-    }
 }

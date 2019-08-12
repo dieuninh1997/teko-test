@@ -2,9 +2,8 @@ package com.ninhttd.devtest.data.remote;
 
 import com.ninhttd.devtest.data.dto.ResponseDTO;
 import com.ninhttd.devtest.data.dto.ResponseListDTO;
-import com.ninhttd.devtest.data.dto.ViewDTO;
 import com.ninhttd.devtest.presentation.view.ProductView;
-import com.ninhttd.devtest.presentation.view.ProductViewLever1;
+import com.ninhttd.devtest.presentation.view.ProductViewLevel1;
 
 import io.reactivex.Single;
 import retrofit2.http.GET;
@@ -20,5 +19,9 @@ public interface TekoApi {
             @Query("terminal") String terminal);
 
     @GET("search/?channel=pv_online&visitorId=&q=&terminal=CP01")
-    Single<ResponseDTO<ProductViewLever1>> getProductList();
+    Single<ResponseDTO<ProductViewLevel1>> getProductList();
+
+
+    @GET("search/?channel=pv_online&visitorId=&q=&terminal=CP01")
+    Single<ResponseDTO<ProductViewLevel1>> getProductList(@Query("_page") int page);
 }

@@ -7,7 +7,7 @@ import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
 
-public class ProductViewLever1 {
+public class ProductViewLevel1 {
     @SerializedName("products")
   public List<ProductView> products;
 

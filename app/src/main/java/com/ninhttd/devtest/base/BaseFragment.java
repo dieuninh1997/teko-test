@@ -1,5 +1,6 @@
 package com.ninhttd.devtest.base;
 
+import android.app.Application;
 import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,6 +13,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.google.gson.internal.LinkedTreeMap;
+import com.ninhttd.devtest.TekoApplication;
 import com.ninhttd.devtest.custom.DialogUtil;
 import com.ninhttd.devtest.custom.LogUtils;
 import com.ninhttd.devtest.data.dto.ErrorDTO;
@@ -100,5 +102,15 @@ public abstract class BaseFragment extends Fragment implements BaseView {
             }
             HandlerException.showException(getContext(), messageKey);
         }
+    }
+
+    @Override
+    public void showLoading() {
+        DialogUtil.getInstance(getContext()).showDialogLoading();
+    }
+
+    @Override
+    public void hideLoading() {
+        DialogUtil.getInstance(getContext()).dismissDialog();
     }
 }

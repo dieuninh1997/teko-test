@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 
 import com.google.gson.Gson;
+import com.ninhttd.devtest.BuildConfig;
 import com.ninhttd.devtest.TekoApplication;
 import com.ninhttd.devtest.data.remote.TekoApi;
 import com.ninhttd.devtest.data.remote.interceptor.AuthInterceptor;
@@ -42,6 +43,11 @@ public class AppModule {
     Context provideContext() {
         return mApplication;
     }
+
+//    @Provides
+//    public Application provideApplication() {
+//        return mApplication;
+//    }
 
     @Singleton
     @Provides
@@ -102,12 +108,17 @@ public class AppModule {
             builder.readTimeout(45, TimeUnit.SECONDS);
             builder.connectTimeout(2, TimeUnit.MINUTES);
             HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
-            logging.setLevel(HttpLoggingInterceptor.Level.BODY);
+            if (BuildConfig.DEBUG) {
+                logging.setLevel(HttpLoggingInterceptor.Level.BODY);
+            }else {
+                logging.setLevel(HttpLoggingInterceptor.Level.NONE);
+            }
             return logging;
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
+
     @Singleton
     @Provides
     Gson provideGson() {

@@ -6,7 +6,7 @@ import com.ninhttd.devtest.data.dto.ResponseDTO;
 import com.ninhttd.devtest.data.dto.ResponseListDTO;
 import com.ninhttd.devtest.data.remote.TekoApi;
 import com.ninhttd.devtest.presentation.view.ProductView;
-import com.ninhttd.devtest.presentation.view.ProductViewLever1;
+import com.ninhttd.devtest.presentation.view.ProductViewLevel1;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -35,8 +35,12 @@ public class TekoRepository {
     }
 
 
-    public Single<ResponseDTO<ProductViewLever1>> getProductList() {
+    public Single<ResponseDTO<ProductViewLevel1>> getProductList() {
         return tekoApi.getProductList();
     }
 
+    public Single<ResponseDTO<ProductViewLevel1>> loadMore(int page)
+    {
+        return tekoApi.getProductList(page);
+    }
 }

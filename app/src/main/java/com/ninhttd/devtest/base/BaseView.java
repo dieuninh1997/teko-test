@@ -4,4 +4,6 @@ import com.ninhttd.devtest.data.dto.ErrorDTO;
 
 public interface BaseView {
     void onErrorAPI(ErrorDTO errorDTO);
+    void showLoading();
+    void hideLoading();
 }

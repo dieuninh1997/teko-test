@@ -8,8 +8,8 @@ import androidx.lifecycle.MutableLiveData;
 
 import io.reactivex.disposables.CompositeDisposable;
 
-public class BaseViewModel extends AndroidViewModel {
-
+public class BaseViewModel<T extends BaseView> extends AndroidViewModel {
+    public T view;
     public CompositeDisposable disposable;
     public final MutableLiveData<Throwable> errorLD = new MutableLiveData<>();
 
@@ -17,6 +17,10 @@ public class BaseViewModel extends AndroidViewModel {
     public BaseViewModel(@NonNull Application application) {
         super(application);
         disposable = new CompositeDisposable();
+    }
+
+    public void setView(T view) {
+        this.view = view;
     }
 
     @Override

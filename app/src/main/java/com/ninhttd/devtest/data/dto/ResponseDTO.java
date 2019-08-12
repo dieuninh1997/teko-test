@@ -1,12 +1,14 @@
 package com.ninhttd.devtest.data.dto;
 
-import lombok.Getter;
-import lombok.Setter;
+import com.google.gson.annotations.SerializedName;
 
 public class ResponseDTO<DTO> extends StatusDTO {
     private String errors;
 
     private DTO result;
+
+    @SerializedName("extra")
+    private ExtraDTO extra;
 
     public void setErrors(String errors) {
         this.errors = errors;
@@ -22,5 +24,13 @@ public class ResponseDTO<DTO> extends StatusDTO {
 
     public String getErrors() {
         return errors;
+    }
+
+    public ExtraDTO getExtra() {
+        return extra;
+    }
+
+    public void setExtra(ExtraDTO extra) {
+        this.extra = extra;
     }
 }

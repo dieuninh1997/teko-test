@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class ProductDetailSliderAdapter extends RecyclerView.Adapter<ProductDetailSliderAdapter.ViewHolder> {
+
     @NonNull
     @Override
     public ProductDetailSliderAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

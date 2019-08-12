@@ -29,8 +29,6 @@ import java.time.LocalDate;
 import java.util.Date;
 import java.util.TimeZone;
 
-import lombok.Getter;
-
 public class TekoApplication extends Application {
     private static Context mContext;
     private AppComponent appComponent;
@@ -48,6 +46,7 @@ public class TekoApplication extends Application {
                 .create();
         this.appComponent = DaggerAppComponent.builder().application(this)
                 .appModule(new AppModule(this))
+
                 .build();
         appComponent.inject(this);
         sharedPrefsHelper = SharedPrefsHelper.getInstance();
