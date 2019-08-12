@@ -1,4 +1,14 @@
 <resources>
     <string name="app_name">dev test</string>
     <string name="product_seacrch_by_keyword">Nhập tên, mã sản phẩm</string>
+    <string name="ma_sp">Mã SP:</string>
+    <string name="tab_title_0">Mô tả sản phẩm</string>
+    <string name="tab_title_1">Thông số kỹ thuật</string>
+    <string name="tab_title_2">So sánh giá</string>
+    <string name="thuong_hieu">Thương hiệu</string>
+    <string name="bao_hanh">Bảo hành</string>
+    <string name="cong_suat">Công suất</string>
+    <string name="bo_nho_dem">Bộ nhớ đệm</string>
+    <string name="show_more">Hiển thị nhiều hơn</string>
+    <string name="sp_cung_loai">Sản phẩm cùng loại</string>
 </resources>

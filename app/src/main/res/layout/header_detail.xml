@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/white"
     android:orientation="horizontal"
     android:paddingHorizontal="11dp"
@@ -30,10 +31,11 @@
             android:layout_height="wrap_content"
             android:ellipsize="end"
             android:lines="1"
-            android:text="Bộ vi xử lý/ CPU Core I7 bla bla"
+            tools:text="Bộ vi xử lý/ CPU Core I7 bla bla"
             android:textAlignment="center"
             android:textColor="@color/darkGrey"
-            android:textSize="13sp" />
+            android:textSize="13sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/txt_price"
@@ -41,10 +43,11 @@
             android:layout_height="wrap_content"
             android:ellipsize="end"
             android:lines="1"
-            android:text="10.420.000 đ"
+            tools:text="10.420.000 đ"
             android:textAlignment="center"
             android:textColor="@color/tomato"
-            android:textSize="13sp" />
+            android:textSize="13sp"
+            android:textStyle="bold" />
     </LinearLayout>
 
     <ImageButton

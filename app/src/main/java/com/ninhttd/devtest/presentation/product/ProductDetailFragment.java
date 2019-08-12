@@ -8,17 +8,24 @@ import android.os.Handler;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.Transformation;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.PagerSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager.widget.ViewPager;
 
+import com.google.android.material.tabs.TabLayout;
 import com.ninhttd.devtest.R;
 import com.ninhttd.devtest.base.BaseFragment;
 import com.ninhttd.devtest.presentation.product.adapter.ProductDetailSliderAdapter;
+import com.ninhttd.devtest.presentation.product.adapter.TabsAdapter;
 
 import butterknife.BindView;
+import butterknife.internal.Utils;
 
 public class ProductDetailFragment extends BaseFragment implements View.OnClickListener {
     private static final String TAG = "ProductDetailFragment";
@@ -27,11 +34,24 @@ public class ProductDetailFragment extends BaseFragment implements View.OnClickL
 
     @BindView(R.id.rv_slider)
     RecyclerView rvSlider;
+
+    @BindView(R.id.tab_layout)
+    TabLayout tabLayout;
+
+    @BindView(R.id.view_pager)
+    ViewPager viewPager;
+
     ProductDetailSliderAdapter sliderAdapter;
+    TabsAdapter tabsAdapter;
 
     @Override
     protected void afterView() {
         imgBack.setOnClickListener(this);
+
+        tabsAdapter = new TabsAdapter(getContext(), getFragmentManager());
+        viewPager.setAdapter(tabsAdapter);
+        tabLayout.setupWithViewPager(viewPager, true);
+        tabLayout.getTabAt(1).select();
 
 //        rvSlider.setLayoutManager(new CustomLinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
 //        PagerSnapHelper snapHelper=new PagerSnapHelper();
