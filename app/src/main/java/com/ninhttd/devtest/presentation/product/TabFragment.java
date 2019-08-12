@@ -21,7 +21,7 @@ public class TabFragment extends BaseFragment {
         String tabTitle = arguments.getString(Constant.ViewParam.TAB_TITLE);
         if (tabTitle.equals(getContext().getString(R.string.tab_title_0))) {
             return R.layout.fragment_tab_mo_ta;
-        } else  if (tabTitle.equals(getContext().getString(R.string.tab_title_1))) {
+        } else if (tabTitle.equals(getContext().getString(R.string.tab_title_1))) {
             return R.layout.fragment_tab_thong_so_ky_thuat;
         } else {
             return R.layout.fragment_tab;

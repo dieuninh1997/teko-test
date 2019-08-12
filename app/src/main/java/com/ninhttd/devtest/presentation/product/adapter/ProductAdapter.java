@@ -46,21 +46,25 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         if (data.size() > 0) {
             Product item = data.get(position);
-            if (item.getImages().size() > 0) {
-                Glide.with(fragmentActivity.getApplicationContext()).load(item.getImages().get(0).getUrl()).into(holder.imgDisplay);
-            } else {
-                holder.imgDisplay.setImageDrawable(fragmentActivity.getResources().getDrawable(R.mipmap.small));
-            }
-            holder.txtDisplayName.setText(item.getDisplayName());
-            holder.txtSalePrice.setText(item.getPrice().getSupplierSalePrice());
-            holder.txtSellPrice.setText(item.getPrice().getSellPrice());
-
-            holder.lnParent.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    navigateToProductDetail(item.getSku());
+            if (item != null) {
+                String salePrice = item.getPrice().getSupplierSalePrice() != null ? item.getPrice().getSupplierSalePrice().toString() : "";
+                String sellPrice = item.getPrice().getSellPrice() != null ? item.getPrice().getSellPrice().toString() : "";
+                if (item.getImages().size() > 0) {
+                    Glide.with(fragmentActivity.getApplicationContext()).load(item.getImages().get(0).getUrl()).into(holder.imgDisplay);
+                } else {
+                    holder.imgDisplay.setImageDrawable(fragmentActivity.getResources().getDrawable(R.mipmap.small));
                 }
-            });
+                holder.txtDisplayName.setText(item.getDisplayName());
+                holder.txtSalePrice.setText(salePrice);
+                holder.txtSellPrice.setText(sellPrice);
+
+                holder.lnParent.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        navigateToProductDetail(item.getSku());
+                    }
+                });
+            }
         }
     }
 
@@ -80,7 +84,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
     public void appendData(List<Product> products) {
         int beforeSize = data.size();
         data.addAll(products);
-        notifyItemRangeInserted(beforeSize-1, products.size());
+        notifyItemRangeInserted(beforeSize - 1, products.size());
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.ninhttd.devtest.R;
+import com.ninhttd.devtest.presentation.product.model.Image;
 import com.ninhttd.devtest.presentation.product.model.Product;
 
 import java.util.List;
@@ -20,18 +21,18 @@ import butterknife.ButterKnife;
 
 public class ProductDetailSliderAdapter extends RecyclerView.Adapter<ProductDetailSliderAdapter.ViewHolder> {
 
-    List<Product.Image> data;
+    List<Image> data;
     FragmentActivity fragmentActivity;
 
-    public List<Product.Image> getData() {
+    public List<Image> getData() {
         return data;
     }
 
-    public void setData(List<Product.Image> data) {
+    public void setData(List<Image> data) {
         this.data = data;
     }
 
-    public ProductDetailSliderAdapter(List<Product.Image> data, FragmentActivity fragmentActivity) {
+    public ProductDetailSliderAdapter(List<Image> data, FragmentActivity fragmentActivity) {
         this.data = data;
         this.fragmentActivity = fragmentActivity;
     }
@@ -46,7 +47,7 @@ public class ProductDetailSliderAdapter extends RecyclerView.Adapter<ProductDeta
     @Override
     public void onBindViewHolder(@NonNull ProductDetailSliderAdapter.ViewHolder holder, int position) {
         if (data.size() > 0) {
-            Product.Image item = data.get(position);
+            Image item = data.get(position);
             if (item.getUrl() != null) {
                 Glide.with(fragmentActivity.getApplicationContext()).load(item.getUrl()).into(holder.imgSlider);
             }

@@ -4,128 +4,132 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="12dp">
+    <!--<TextView-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:gravity="center"-->
+    <!--android:text="thong so kt" />-->
+    <!--<ScrollView-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent">-->
 
-    <ScrollView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <!--thuong hieu-->
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-            <!--thuong hieu-->
-            <LinearLayout
-                android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_rounded_pale_grey_8dp"
+            android:orientation="horizontal"
+            android:paddingHorizontal="12dp"
+            android:paddingVertical="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/bg_rounded_pale_grey_8dp"
-                android:orientation="horizontal"
-                android:paddingHorizontal="12dp"
-                android:paddingVertical="8dp">
+                android:lineHeight="19dp"
+                android:text="@string/thuong_hieu"
+                android:textColor="@color/coolGrey"
+                android:textSize="14sp" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:lineHeight="19dp"
-                    android:text="@string/thuong_hieu"
-                    android:textColor="@color/coolGrey"
-                    android:textSize="14sp" />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:lineHeight="19dp"
-                    android:textAlignment="textEnd"
-                    android:textColor="@color/darkGrey"
-                    android:textSize="14sp"
-                    tools:text="Cooler Master" />
-            </LinearLayout>
-
-            <!--bao hanh-->
-            <LinearLayout
-                android:layout_width="match_parent"
+            <TextView
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:background="@drawable/bg_rounded_8dp"
-                android:orientation="horizontal"
-                android:paddingHorizontal="12dp"
-                android:paddingVertical="8dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:lineHeight="19dp"
-                    android:text="@string/bao_hanh"
-                    android:textColor="@color/coolGrey"
-                    android:textSize="14sp" />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:lineHeight="19dp"
-                    android:textAlignment="textEnd"
-                    android:textColor="@color/darkGrey"
-                    android:textSize="14sp"
-                    tools:text="36 tháng" />
-            </LinearLayout>
-
-            <!--cong suat -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/bg_rounded_pale_grey_8dp"
-                android:orientation="horizontal"
-                android:paddingHorizontal="12dp"
-                android:paddingVertical="8dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:lineHeight="19dp"
-                    android:text="@string/cong_suat"
-                    android:textColor="@color/coolGrey"
-                    android:textSize="14sp" />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:lineHeight="19dp"
-                    android:textAlignment="textEnd"
-                    android:textColor="@color/darkGrey"
-                    android:textSize="14sp"
-                    tools:text="140W" />
-            </LinearLayout>
-
-            <!--bo nho dem-->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/bg_rounded_8dp"
-                android:orientation="horizontal"
-                android:paddingHorizontal="12dp"
-                android:paddingVertical="8dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:lineHeight="19dp"
-                    android:text="@string/bo_nho_dem"
-                    android:textColor="@color/coolGrey"
-                    android:textSize="14sp" />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:lineHeight="19dp"
-                    android:textAlignment="textEnd"
-                    android:textColor="@color/darkGrey"
-                    android:textSize="14sp"
-                    tools:text="8.25MB" />
-            </LinearLayout>
+                android:layout_weight="1"
+                android:lineHeight="19dp"
+                android:textAlignment="textEnd"
+                android:textColor="@color/darkGrey"
+                android:textSize="14sp"
+                tools:text="Cooler Master" />
         </LinearLayout>
-    </ScrollView>
+
+        <!--bao hanh-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_rounded_8dp"
+            android:orientation="horizontal"
+            android:paddingHorizontal="12dp"
+            android:paddingVertical="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:lineHeight="19dp"
+                android:text="@string/bao_hanh"
+                android:textColor="@color/coolGrey"
+                android:textSize="14sp" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:lineHeight="19dp"
+                android:textAlignment="textEnd"
+                android:textColor="@color/darkGrey"
+                android:textSize="14sp"
+                tools:text="36 tháng" />
+        </LinearLayout>
+
+        <!--cong suat -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_rounded_pale_grey_8dp"
+            android:orientation="horizontal"
+            android:paddingHorizontal="12dp"
+            android:paddingVertical="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:lineHeight="19dp"
+                android:text="@string/cong_suat"
+                android:textColor="@color/coolGrey"
+                android:textSize="14sp" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:lineHeight="19dp"
+                android:textAlignment="textEnd"
+                android:textColor="@color/darkGrey"
+                android:textSize="14sp"
+                tools:text="140W" />
+        </LinearLayout>
+
+        <!--bo nho dem-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_rounded_8dp"
+            android:orientation="horizontal"
+            android:paddingHorizontal="12dp"
+            android:paddingVertical="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:lineHeight="19dp"
+                android:text="@string/bo_nho_dem"
+                android:textColor="@color/coolGrey"
+                android:textSize="14sp" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:lineHeight="19dp"
+                android:textAlignment="textEnd"
+                android:textColor="@color/darkGrey"
+                android:textSize="14sp"
+                tools:text="8.25MB" />
+        </LinearLayout>
+    </LinearLayout>
+    <!--</ScrollView>-->
 
 
     <LinearLayout
