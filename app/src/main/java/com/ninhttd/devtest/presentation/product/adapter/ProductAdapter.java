@@ -15,7 +15,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.ninhttd.devtest.R;
 import com.ninhttd.devtest.presentation.product.ProductDetailFragment;
-import com.ninhttd.devtest.presentation.view.ProductView;
+import com.ninhttd.devtest.presentation.product.model.Product;
+import com.ninhttd.devtest.utils.Constant;
 import com.ninhttd.devtest.utils.Navigator;
 
 import java.util.List;
@@ -25,12 +26,11 @@ import butterknife.ButterKnife;
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHolder> {
     private static final String TAG = "ProductAdapter";
-    private static final String PRODUCT_SKU = "PRODUCT_SKU";
-    List<ProductView> data;
+    List<Product> data;
     FragmentActivity fragmentActivity;
 
 
-    public ProductAdapter(List<ProductView> data, FragmentActivity fragmentActivity) {
+    public ProductAdapter(List<Product> data, FragmentActivity fragmentActivity) {
         this.data = data;
         this.fragmentActivity = fragmentActivity;
     }
@@ -45,7 +45,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         if (data.size() > 0) {
-            ProductView item = data.get(position);
+            Product item = data.get(position);
             if (item.getImages().size() > 0) {
                 Glide.with(fragmentActivity.getApplicationContext()).load(item.getImages().get(0).getUrl()).into(holder.imgDisplay);
             } else {
@@ -66,7 +66,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
 
     private void navigateToProductDetail(String sku) {
         Bundle bundle = new Bundle();
-        bundle.putString(PRODUCT_SKU, sku);
+        bundle.putString(Constant.ViewParam.PRODUCT_SKU, sku);
         ProductDetailFragment fragment = new ProductDetailFragment();
         fragment.setArguments(bundle);
         Navigator.startFragmentWithAnimation(fragmentActivity, R.id.screenContainer, fragment, null, true, 1);
@@ -77,10 +77,10 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         return data.size();
     }
 
-    public void appendData(List<ProductView> products) {
+    public void appendData(List<Product> products) {
         int beforeSize = data.size();
         data.addAll(products);
-        notifyItemRangeInserted(beforeSize-1,products.size());
+        notifyItemRangeInserted(beforeSize-1, products.size());
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -101,11 +101,11 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         }
     }
 
-    public List<ProductView> getData() {
+    public List<Product> getData() {
         return data;
     }
 
-    public void setData(List<ProductView> data) {
+    public void setData(List<Product> data) {
         this.data = data;
         notifyDataSetChanged();
     }

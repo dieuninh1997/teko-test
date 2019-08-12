@@ -1,18 +1,12 @@
 package com.ninhttd.devtest.presentation.product;
 
-import android.annotation.TargetApi;
-import android.app.Activity;
-import android.graphics.drawable.Drawable;
-import android.os.Build;
+import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
-import android.view.animation.Animation;
-import android.view.animation.Transformation;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
 
+import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.PagerSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
@@ -21,13 +15,21 @@ import androidx.viewpager.widget.ViewPager;
 import com.google.android.material.tabs.TabLayout;
 import com.ninhttd.devtest.R;
 import com.ninhttd.devtest.base.BaseFragment;
+import com.ninhttd.devtest.data.dto.ResponseDTO;
 import com.ninhttd.devtest.presentation.product.adapter.ProductDetailSliderAdapter;
 import com.ninhttd.devtest.presentation.product.adapter.TabsAdapter;
+import com.ninhttd.devtest.presentation.product.model.Product;
+import com.ninhttd.devtest.presentation.product.model.ProductLevel2;
+import com.ninhttd.devtest.presentation.product.view.ProductView;
+import com.ninhttd.devtest.presentation.product.viewmodel.ProductDetailViewModel;
+import com.ninhttd.devtest.utils.Constant;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
-import butterknife.internal.Utils;
 
-public class ProductDetailFragment extends BaseFragment implements View.OnClickListener {
+public class ProductDetailFragment extends BaseFragment implements View.OnClickListener, ProductView {
     private static final String TAG = "ProductDetailFragment";
     @BindView(R.id.img_back)
     ImageButton imgBack;
@@ -41,8 +43,11 @@ public class ProductDetailFragment extends BaseFragment implements View.OnClickL
     @BindView(R.id.view_pager)
     ViewPager viewPager;
 
-    ProductDetailSliderAdapter sliderAdapter;
     TabsAdapter tabsAdapter;
+
+    ProductDetailViewModel productDetailViewModel;
+    ProductDetailSliderAdapter sliderAdapter;
+    List<Product.Image> sliderImages = new ArrayList<>();
 
     @Override
     protected void afterView() {
@@ -53,10 +58,21 @@ public class ProductDetailFragment extends BaseFragment implements View.OnClickL
         tabLayout.setupWithViewPager(viewPager, true);
         tabLayout.getTabAt(1).select();
 
-//        rvSlider.setLayoutManager(new CustomLinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
-//        PagerSnapHelper snapHelper=new PagerSnapHelper();
-//        snapHelper.attachToRecyclerView(rvSlider);
-//        rvSlider.addItemDecoration(new CirclePagerIndicatorDecoration());
+
+        productDetailViewModel = ViewModelProviders.of(getActivity()).get(ProductDetailViewModel.class);
+        productDetailViewModel.setView(this);
+        sliderAdapter=new ProductDetailSliderAdapter(sliderImages, getActivity());
+        rvSlider.setLayoutManager(new CustomLinearLayoutManager(getActivity(), RecyclerView.HORIZONTAL, false));
+        rvSlider.setAdapter(sliderAdapter);
+
+        Bundle arguments = getArguments();
+        String sku = arguments.getString(Constant.ViewParam.PRODUCT_SKU);
+
+        productDetailViewModel.getProductDetail(sku);
+
+        PagerSnapHelper snapHelper=new PagerSnapHelper();
+        snapHelper.attachToRecyclerView(rvSlider);
+        rvSlider.addItemDecoration(new CirclePagerIndicatorDecoration());
 //        final int speedScroll = 3000;
 //        final Handler handler = new Handler();
 //        final Runnable runnable = new Runnable() {
@@ -104,5 +120,21 @@ public class ProductDetailFragment extends BaseFragment implements View.OnClickL
             default:
                 break;
         }
+    }
+
+    @Override
+    public void onLoadDataDetailSuccess(ResponseDTO<ProductLevel2> productResponseDTO) {
+        if (productResponseDTO != null) {
+            Product item = productResponseDTO.getResult().getProduct();
+            sliderAdapter.setData(item.getImages());
+            sliderAdapter.notifyDataSetChanged();
+        }else{
+            Log.e(TAG, "onLoadDataDetailSuccess: productResponseDTO is NULL");
+        }
+    }
+
+    @Override
+    public void onLoadDataDetailFailed(Throwable e) {
+
     }
 }

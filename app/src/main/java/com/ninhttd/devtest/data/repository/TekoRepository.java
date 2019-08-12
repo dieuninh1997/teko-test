@@ -5,13 +5,15 @@ import android.util.Log;
 import com.ninhttd.devtest.data.dto.ResponseDTO;
 import com.ninhttd.devtest.data.dto.ResponseListDTO;
 import com.ninhttd.devtest.data.remote.TekoApi;
-import com.ninhttd.devtest.presentation.view.ProductView;
-import com.ninhttd.devtest.presentation.view.ProductViewLevel1;
+import com.ninhttd.devtest.presentation.product.model.Product;
+import com.ninhttd.devtest.presentation.product.model.ProductLevel1;
+import com.ninhttd.devtest.presentation.product.model.ProductLevel2;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import io.reactivex.Single;
+import io.reactivex.disposables.Disposable;
 
 @Singleton
 public class TekoRepository {
@@ -24,23 +26,24 @@ public class TekoRepository {
     }
 
 
-    public Single<ResponseListDTO<ProductView>> getProductList(String channel,
-                                                               String visitorId,
-                                                               String q,
-                                                               String terminal) {
-        Log.e(TAG, "getProductList params: (channel: "+channel+", visitorId: "+visitorId+", q: "+q+", terminal: "+terminal+")");
-        Log.e(TAG, "tekoApi.getProductList: "+tekoApi.getProductList(channel, visitorId, q, terminal));
-
+    public Single<ResponseListDTO<Product>> getProductList(String channel,
+                                                           String visitorId,
+                                                           String q,
+                                                           String terminal) {
         return tekoApi.getProductList(channel, visitorId, q, terminal);
     }
 
 
-    public Single<ResponseDTO<ProductViewLevel1>> getProductList() {
+    public Single<ResponseDTO<ProductLevel1>> getProductList() {
         return tekoApi.getProductList();
     }
 
-    public Single<ResponseDTO<ProductViewLevel1>> loadMore(int page)
+    public Single<ResponseDTO<ProductLevel1>> loadMore(int page)
     {
         return tekoApi.getProductList(page);
+    }
+
+    public Single<ResponseDTO<ProductLevel2>> getProductDetail(String sku) {
+        return tekoApi.getProductDetail(sku);
     }
 }

@@ -9,22 +9,72 @@ import com.ninhttd.devtest.TekoApplication;
 import com.ninhttd.devtest.base.BaseViewModel;
 import com.ninhttd.devtest.data.dto.ResponseDTO;
 import com.ninhttd.devtest.data.repository.TekoRepository;
-import com.ninhttd.devtest.presentation.view.ProductView;
+import com.ninhttd.devtest.presentation.product.model.Product;
+import com.ninhttd.devtest.presentation.product.model.ProductLevel2;
+import com.ninhttd.devtest.presentation.product.view.ProductView;
 
 import javax.inject.Inject;
 
-public class ProductDetailViewModel extends BaseViewModel {
+import io.reactivex.Scheduler;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.observers.DisposableSingleObserver;
+import io.reactivex.schedulers.Schedulers;
+
+public class ProductDetailViewModel extends BaseViewModel<ProductView> {
 
     private static final String TAG = "ProductDetailViewModel";
 
     @Inject
     TekoRepository tekoRepository;
 
-    public MutableLiveData<ResponseDTO<ProductView>> productDetailLD = new MutableLiveData<>();
+    public MutableLiveData<ResponseDTO<Product>> productDetailLD = new MutableLiveData<>();
 
 
     @Inject
     public ProductDetailViewModel(@NonNull Application application) {
         super(application);
+        ((TekoApplication) application).getAppComponent().inject(this);
+    }
+
+
+    boolean loading = false;
+
+    public void getProductDetail(String sku) {
+        if (loading) {
+            return;
+        }
+        disposable.add(tekoRepository.getProductDetail(sku)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe(disposable1 -> {
+                    loading = true;
+                    if (view != null) {
+                        view.showLoading();
+                    }
+                })
+                .doFinally(() -> {
+                    loading = false;
+                    if (view != null) {
+                        view.hideLoading();
+                    }
+                })
+                .subscribeWith(new DisposableSingleObserver<ResponseDTO<ProductLevel2>>() {
+
+                    @Override
+                    public void onSuccess(ResponseDTO<ProductLevel2> productResponseDTO) {
+                        if (view != null) {
+                            view.onLoadDataDetailSuccess(productResponseDTO);
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        if (view != null) {
+                            view.onLoadDataDetailFailed(e);
+                        }
+                    }
+                })
+
+        );
     }
 }

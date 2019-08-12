@@ -1,4 +1,4 @@
-package com.ninhttd.devtest.presentation.view;
+package com.ninhttd.devtest.presentation.product.model;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,7 +6,7 @@ import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
 
-public class ProductView {
+public class Product {
     @Setter
     private String sku; //ma san pham
 
@@ -37,7 +37,7 @@ public class ProductView {
         return images;
     }
 
-    public ProductView(String sku, String displayName, Color color, List<Image> images, Price price) {
+    public Product(String sku, String displayName, Color color, List<Image> images, Price price) {
         this.sku = sku;
         this.displayName = displayName;
         this.color = color;

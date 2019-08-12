@@ -4,6 +4,7 @@ import android.app.Application;
 
 import com.ninhttd.devtest.TekoApplication;
 import com.ninhttd.devtest.presentation.product.ProductFragment;
+import com.ninhttd.devtest.presentation.product.viewmodel.ProductDetailViewModel;
 import com.ninhttd.devtest.presentation.product.viewmodel.ProductViewModel;
 
 import javax.inject.Singleton;
@@ -15,6 +16,7 @@ import dagger.Component;
 @Component(modules = {AppModule.class})
 public interface AppComponent {
     void inject(ProductViewModel productViewModel);
+    void inject(ProductDetailViewModel productDetailViewModel);
     void inject(TekoApplication tekoApplication);
 
     void inject(ProductFragment productFragment);

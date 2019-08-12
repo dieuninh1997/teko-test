@@ -22,8 +22,9 @@ import com.ninhttd.devtest.base.BaseFragment;
 import com.ninhttd.devtest.data.dto.ResponseDTO;
 import com.ninhttd.devtest.presentation.product.adapter.ProductAdapter;
 import com.ninhttd.devtest.presentation.product.viewmodel.ProductViewModel;
-import com.ninhttd.devtest.presentation.view.ProductView;
-import com.ninhttd.devtest.presentation.view.ProductViewLevel1;
+import com.ninhttd.devtest.presentation.product.model.Product;
+import com.ninhttd.devtest.presentation.product.model.ProductLevel1;
+import com.ninhttd.devtest.presentation.product.view.ProductListView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,7 +42,7 @@ public class ProductFragment extends BaseFragment implements View.OnClickListene
     @BindView(R.id.img_back)
     ImageButton imgBack;
 
-    private List<ProductView> data = new ArrayList<>();
+    private List<Product> data = new ArrayList<>();
 
     ProductViewModel productViewModel;
     ProductAdapter adapter;
@@ -59,8 +60,6 @@ public class ProductFragment extends BaseFragment implements View.OnClickListene
         rvProduct.setAdapter(adapter);
 
         initScrollListener();
-
-
         productViewModel.getProductList();
 
 //        imgBack.setOnClickListener(this);
@@ -131,10 +130,10 @@ public class ProductFragment extends BaseFragment implements View.OnClickListene
     }
 
     @Override
-    public void onLoadDataSucces(ResponseDTO<ProductViewLevel1> responseDTO) {
+    public void onLoadDataSucces(ResponseDTO<ProductLevel1> responseDTO) {
         if (responseDTO != null) {
-            List<ProductView> items = responseDTO.getResult().getProducts();
-            Log.e(TAG, "List<ProductView> " + items);
+            List<Product> items = responseDTO.getResult().getProducts();
+            Log.e(TAG, "List<Product> " + items);
             adapter.setData(items);
         } else {
             Log.e(TAG, "responseListDTO is NULL");
@@ -148,7 +147,7 @@ public class ProductFragment extends BaseFragment implements View.OnClickListene
     }
 
     @Override
-    public void appendData(ResponseDTO<ProductViewLevel1> viewDTOResponseListDTO) {
+    public void appendData(ResponseDTO<ProductLevel1> viewDTOResponseListDTO) {
         adapter.appendData(viewDTOResponseListDTO.getResult().getProducts());
     }
 

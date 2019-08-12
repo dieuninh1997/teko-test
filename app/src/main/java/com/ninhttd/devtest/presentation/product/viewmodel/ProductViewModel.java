@@ -11,8 +11,8 @@ import com.ninhttd.devtest.base.BaseViewModel;
 import com.ninhttd.devtest.data.dto.ExtraDTO;
 import com.ninhttd.devtest.data.dto.ResponseDTO;
 import com.ninhttd.devtest.data.repository.TekoRepository;
-import com.ninhttd.devtest.presentation.product.ProductListView;
-import com.ninhttd.devtest.presentation.view.ProductViewLevel1;
+import com.ninhttd.devtest.presentation.product.view.ProductListView;
+import com.ninhttd.devtest.presentation.product.model.ProductLevel1;
 
 import javax.inject.Inject;
 
@@ -55,9 +55,9 @@ public class ProductViewModel extends BaseViewModel<ProductListView> {
                         view.hideLoading();
                     }
                 })
-                .subscribeWith(new DisposableSingleObserver<ResponseDTO<ProductViewLevel1>>() {
+                .subscribeWith(new DisposableSingleObserver<ResponseDTO<ProductLevel1>>() {
                     @Override
-                    public void onSuccess(ResponseDTO<ProductViewLevel1> viewDTOResponseListDTO) {
+                    public void onSuccess(ResponseDTO<ProductLevel1> viewDTOResponseListDTO) {
                         Log.e(TAG, "getProductList onSuccess " + viewDTOResponseListDTO);
                         if (view != null) {
                             view.onLoadDataSucces(viewDTOResponseListDTO);
@@ -92,9 +92,9 @@ public class ProductViewModel extends BaseViewModel<ProductListView> {
                     loading = false;
                     view.hideLoadingMore();
                 })
-                .subscribeWith(new DisposableSingleObserver<ResponseDTO<ProductViewLevel1>>() {
+                .subscribeWith(new DisposableSingleObserver<ResponseDTO<ProductLevel1>>() {
                     @Override
-                    public void onSuccess(ResponseDTO<ProductViewLevel1> viewDTOResponseListDTO) {
+                    public void onSuccess(ResponseDTO<ProductLevel1> viewDTOResponseListDTO) {
                         Log.e(TAG, "loadMoreData onSuccess " + viewDTOResponseListDTO);
                         page++;
 
