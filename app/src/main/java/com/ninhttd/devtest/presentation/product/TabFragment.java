@@ -2,7 +2,6 @@ package com.ninhttd.devtest.presentation.product;
 
 import android.os.Bundle;
 import android.view.View;
-import android.view.animation.Animation;
 import android.widget.LinearLayout;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -11,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.ninhttd.devtest.R;
 import com.ninhttd.devtest.base.BaseFragment;
 import com.ninhttd.devtest.presentation.product.adapter.ThongSoKiThuatAdapter;
-import com.ninhttd.devtest.presentation.product.model.AttributeGroup;
+import com.ninhttd.devtest.data.entity.AttributeGroup;
 import com.ninhttd.devtest.utils.Constant;
 
 import java.util.List;

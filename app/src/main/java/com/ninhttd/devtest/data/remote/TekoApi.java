@@ -2,9 +2,9 @@ package com.ninhttd.devtest.data.remote;
 
 import com.ninhttd.devtest.data.dto.ResponseDTO;
 import com.ninhttd.devtest.data.dto.ResponseListDTO;
-import com.ninhttd.devtest.presentation.product.model.Product;
-import com.ninhttd.devtest.presentation.product.model.ProductLevel1;
-import com.ninhttd.devtest.presentation.product.model.ProductLevel2;
+import com.ninhttd.devtest.data.entity.Product;
+import com.ninhttd.devtest.data.entity.ProductLevel1;
+import com.ninhttd.devtest.data.entity.ProductLevel2;
 
 import io.reactivex.Single;
 import retrofit2.http.GET;

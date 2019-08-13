@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.ninhttd.devtest.R;
 import com.ninhttd.devtest.presentation.product.ProductDetailFragment;
-import com.ninhttd.devtest.presentation.product.model.Product;
+import com.ninhttd.devtest.data.entity.Product;
 import com.ninhttd.devtest.utils.Constant;
 import com.ninhttd.devtest.utils.Navigator;
 

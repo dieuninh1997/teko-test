@@ -1,23 +1,23 @@
 
-package com.ninhttd.devtest.presentation.product.model;
+package com.ninhttd.devtest.data.entity;
 
 import com.google.gson.annotations.SerializedName;
 
 
 @SuppressWarnings("unused")
-public class ProductLine {
+public class AttributeSet {
 
-    @SerializedName("code")
-    private String mCode;
+    @SerializedName("id")
+    private Long mId;
     @SerializedName("name")
     private String mName;
 
-    public String getCode() {
-        return mCode;
+    public Long getId() {
+        return mId;
     }
 
-    public void setCode(String code) {
-        mCode = code;
+    public void setId(Long id) {
+        mId = id;
     }
 
     public String getName() {

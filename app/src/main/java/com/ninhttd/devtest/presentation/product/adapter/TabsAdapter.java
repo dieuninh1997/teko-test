@@ -2,7 +2,6 @@ package com.ninhttd.devtest.presentation.product.adapter;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.os.Parcelable;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -11,11 +10,10 @@ import androidx.fragment.app.FragmentPagerAdapter;
 
 import com.ninhttd.devtest.R;
 import com.ninhttd.devtest.presentation.product.TabFragment;
-import com.ninhttd.devtest.presentation.product.model.AttributeGroup;
+import com.ninhttd.devtest.data.entity.AttributeGroup;
 import com.ninhttd.devtest.utils.Constant;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 public class TabsAdapter extends FragmentPagerAdapter {

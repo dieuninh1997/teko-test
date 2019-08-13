@@ -1,12 +1,10 @@
-
-package com.ninhttd.devtest.presentation.product.model;
-
-import java.util.List;
+package com.ninhttd.devtest.data.entity;
 
 import com.google.gson.annotations.SerializedName;
 
-public class Attribute {
+import java.util.List;
 
+public class ActiveFlashSale {
     @SerializedName("code")
     private String mCode;
     @SerializedName("values")
@@ -27,5 +25,4 @@ public class Attribute {
     public void setValues(List<Object> values) {
         mValues = values;
     }
-
 }

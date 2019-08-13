@@ -1,10 +1,11 @@
 
-package com.ninhttd.devtest.presentation.product.model;
+package com.ninhttd.devtest.data.entity;
 
 import com.google.gson.annotations.SerializedName;
 
+
 @SuppressWarnings("unused")
-public class Color {
+public class ProductLine {
 
     @SerializedName("code")
     private String mCode;

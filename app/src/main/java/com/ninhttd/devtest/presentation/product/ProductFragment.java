@@ -10,9 +10,9 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
-import android.widget.SearchView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.SearchView;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -23,8 +23,8 @@ import com.ninhttd.devtest.base.BaseFragment;
 import com.ninhttd.devtest.data.dto.ResponseDTO;
 import com.ninhttd.devtest.presentation.product.adapter.ProductAdapter;
 import com.ninhttd.devtest.presentation.product.viewmodel.ProductViewModel;
-import com.ninhttd.devtest.presentation.product.model.Product;
-import com.ninhttd.devtest.presentation.product.model.ProductLevel1;
+import com.ninhttd.devtest.data.entity.Product;
+import com.ninhttd.devtest.data.entity.ProductLevel1;
 import com.ninhttd.devtest.presentation.product.view.ProductListView;
 
 import java.util.ArrayList;

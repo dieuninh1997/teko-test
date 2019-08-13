@@ -1,82 +1,147 @@
 
-package com.ninhttd.devtest.presentation.product.model;
+package com.ninhttd.devtest.data.entity;
 
-import java.util.List;
+import androidx.annotation.NonNull;
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
+
+@Entity
 public class Product {
+    @ColumnInfo
     @SerializedName("allActiveFlashSales")
-    private List<Object> mAllActiveFlashSales;
+    private ArrayList<ActiveFlashSale> mAllActiveFlashSales;
+
+    @ColumnInfo
     @SerializedName("attributeGroups")
-    private List<AttributeGroup> mAttributeGroups;
+    private ArrayList<AttributeGroup> mAttributeGroups;
+
+    @ColumnInfo
     @SerializedName("attributeSet")
     private AttributeSet mAttributeSet;
+
+    @ColumnInfo
     @SerializedName("attributes")
-    private List<Attribute> mAttributes;
+    private ArrayList<Attribute> mAttributes;
+
+    @ColumnInfo
     @SerializedName("brand")
     private Brand mBrand;
+
+    @ColumnInfo
     @SerializedName("categories")
-    private List<Category> mCategories;
+    private ArrayList<Category> mCategories;
+
+    @ColumnInfo
     @SerializedName("color")
     private Color mColor;
+
+    @ColumnInfo
     @SerializedName("createdAt")
     private String mCreatedAt;
+
+    @ColumnInfo
     @SerializedName("displayName")
     private String mDisplayName;
+
+    @ColumnInfo
     @SerializedName("flashSales")
-    private List<Object> mFlashSales;
+    private ArrayList<Object> mFlashSales;
+
+    @ColumnInfo
     @SerializedName("images")
-    private List<Image> mImages;
+    private ArrayList<Image> mImages;
+
+    @ColumnInfo
     @SerializedName("magentoId")
-    private Object mMagentoId;
+    private Double mMagentoId;
+
+    @ColumnInfo
     @SerializedName("name")
     private String mName;
+
+    @ColumnInfo
     @SerializedName("objective")
     private Objective mObjective;
+
+    @ColumnInfo
     @SerializedName("price")
     private Price mPrice;
+
+    @ColumnInfo
     @SerializedName("productLine")
     private ProductLine mProductLine;
+
+    @ColumnInfo
     @SerializedName("productType")
     private ProductType mProductType;
+
+    @ColumnInfo
     @SerializedName("promotionPrices")
-    private List<Object> mPromotionPrices;
+    private ArrayList<Object> mPromotionPrices;
+
+    @ColumnInfo
     @SerializedName("promotions")
-    private List<Object> mPromotions;
+    private ArrayList<Object> mPromotions;
+
+    @ColumnInfo
     @SerializedName("rating")
     private Rating mRating;
+
+    @ColumnInfo
     @SerializedName("seoInfo")
     private SeoInfo mSeoInfo;
+
+    @PrimaryKey
+    @NonNull
     @SerializedName("sku")
     private String mSku;
+
+    @ColumnInfo
     @SerializedName("status")
     private Status mStatus;
+
+    @ColumnInfo
     @SerializedName("stocks")
-    private List<Object> mStocks;
+    private ArrayList<Object> mStocks;
+
+    @ColumnInfo
     @SerializedName("tags")
-    private List<Object> mTags;
+    private ArrayList<Object> mTags;
+
+    @ColumnInfo
     @SerializedName("taxOut")
-    private Object mTaxOut;
+    private Double mTaxOut;
+
+    @ColumnInfo
     @SerializedName("totalAvailable")
-    private Object mTotalAvailable;
+    private Double mTotalAvailable;
+
+    @ColumnInfo
     @SerializedName("url")
-    private Object mUrl;
+    private String mUrl;
+
+    @ColumnInfo
     @SerializedName("warranty")
     private Warranty mWarranty;
 
-    public List<Object> getAllActiveFlashSales() {
+    public ArrayList<ActiveFlashSale> getAllActiveFlashSales() {
         return mAllActiveFlashSales;
     }
 
-    public void setAllActiveFlashSales(List<Object> allActiveFlashSales) {
+    public void setAllActiveFlashSales(ArrayList<ActiveFlashSale> allActiveFlashSales) {
         mAllActiveFlashSales = allActiveFlashSales;
     }
 
-    public List<AttributeGroup> getAttributeGroups() {
+    public ArrayList<AttributeGroup> getAttributeGroups() {
         return mAttributeGroups;
     }
 
-    public void setAttributeGroups(List<AttributeGroup> attributeGroups) {
+    public void setAttributeGroups(ArrayList<AttributeGroup> attributeGroups) {
         mAttributeGroups = attributeGroups;
     }
 
@@ -88,11 +153,11 @@ public class Product {
         mAttributeSet = attributeSet;
     }
 
-    public List<Attribute> getAttributes() {
+    public ArrayList<Attribute> getAttributes() {
         return mAttributes;
     }
 
-    public void setAttributes(List<Attribute> attributes) {
+    public void setAttributes(ArrayList<Attribute> attributes) {
         mAttributes = attributes;
     }
 
@@ -104,11 +169,11 @@ public class Product {
         mBrand = brand;
     }
 
-    public List<Category> getCategories() {
+    public ArrayList<Category> getCategories() {
         return mCategories;
     }
 
-    public void setCategories(List<Category> categories) {
+    public void setCategories(ArrayList<Category> categories) {
         mCategories = categories;
     }
 
@@ -136,27 +201,27 @@ public class Product {
         mDisplayName = displayName;
     }
 
-    public List<Object> getFlashSales() {
+    public ArrayList<Object> getFlashSales() {
         return mFlashSales;
     }
 
-    public void setFlashSales(List<Object> flashSales) {
+    public void setFlashSales(ArrayList<Object> flashSales) {
         mFlashSales = flashSales;
     }
 
-    public List<Image> getImages() {
+    public ArrayList<Image> getImages() {
         return mImages;
     }
 
-    public void setImages(List<Image> images) {
+    public void setImages(ArrayList<Image> images) {
         mImages = images;
     }
 
-    public Object getMagentoId() {
+    public Double getMagentoId() {
         return mMagentoId;
     }
 
-    public void setMagentoId(Object magentoId) {
+    public void setMagentoId(Double magentoId) {
         mMagentoId = magentoId;
     }
 
@@ -200,19 +265,19 @@ public class Product {
         mProductType = productType;
     }
 
-    public List<Object> getPromotionPrices() {
+    public ArrayList<Object> getPromotionPrices() {
         return mPromotionPrices;
     }
 
-    public void setPromotionPrices(List<Object> promotionPrices) {
+    public void setPromotionPrices(ArrayList<Object> promotionPrices) {
         mPromotionPrices = promotionPrices;
     }
 
-    public List<Object> getPromotions() {
+    public ArrayList<Object> getPromotions() {
         return mPromotions;
     }
 
-    public void setPromotions(List<Object> promotions) {
+    public void setPromotions(ArrayList<Object> promotions) {
         mPromotions = promotions;
     }
 
@@ -248,43 +313,43 @@ public class Product {
         mStatus = status;
     }
 
-    public List<Object> getStocks() {
+    public ArrayList<Object> getStocks() {
         return mStocks;
     }
 
-    public void setStocks(List<Object> stocks) {
+    public void setStocks(ArrayList<Object> stocks) {
         mStocks = stocks;
     }
 
-    public List<Object> getTags() {
+    public ArrayList<Object> getTags() {
         return mTags;
     }
 
-    public void setTags(List<Object> tags) {
+    public void setTags(ArrayList<Object> tags) {
         mTags = tags;
     }
 
-    public Object getTaxOut() {
+    public Double getTaxOut() {
         return mTaxOut;
     }
 
-    public void setTaxOut(Object taxOut) {
+    public void setTaxOut(Double taxOut) {
         mTaxOut = taxOut;
     }
 
-    public Object getTotalAvailable() {
+    public Double getTotalAvailable() {
         return mTotalAvailable;
     }
 
-    public void setTotalAvailable(Object totalAvailable) {
+    public void setTotalAvailable(Double totalAvailable) {
         mTotalAvailable = totalAvailable;
     }
 
-    public Object getUrl() {
+    public String getUrl() {
         return mUrl;
     }
 
-    public void setUrl(Object url) {
+    public void setUrl(String url) {
         mUrl = url;
     }
 
@@ -295,5 +360,6 @@ public class Product {
     public void setWarranty(Warranty warranty) {
         mWarranty = warranty;
     }
+
 
 }

@@ -10,9 +10,9 @@ import com.ninhttd.devtest.TekoApplication;
 import com.ninhttd.devtest.base.BaseViewModel;
 import com.ninhttd.devtest.data.dto.ExtraDTO;
 import com.ninhttd.devtest.data.dto.ResponseDTO;
-import com.ninhttd.devtest.data.repository.TekoRepository;
+import com.ninhttd.devtest.data.repository.ProductRepository;
 import com.ninhttd.devtest.presentation.product.view.ProductListView;
-import com.ninhttd.devtest.presentation.product.model.ProductLevel1;
+import com.ninhttd.devtest.data.entity.ProductLevel1;
 
 import javax.inject.Inject;
 
@@ -23,7 +23,7 @@ import io.reactivex.schedulers.Schedulers;
 public class ProductViewModel extends BaseViewModel<ProductListView> {
     private static final String TAG = "ProductViewModel";
     @Inject
-    TekoRepository tekoRepository;
+    ProductRepository productRepository;
     int page = 0;
     ExtraDTO extraDTO;
 
@@ -40,7 +40,7 @@ public class ProductViewModel extends BaseViewModel<ProductListView> {
             return;
         }
         page = 1;
-        disposable.add(tekoRepository.getProductList()
+        disposable.add(productRepository.getProductList()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe(disposable -> {
@@ -81,7 +81,7 @@ public class ProductViewModel extends BaseViewModel<ProductListView> {
         if (page >= extraDTO.getPageSize()) {
             return;
         }
-        disposable.add(tekoRepository.loadMore(page + 1)
+        disposable.add(productRepository.loadMore(page + 1)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe(disposable -> {

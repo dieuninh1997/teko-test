@@ -1,4 +1,4 @@
-package com.ninhttd.devtest.presentation.product.model;
+package com.ninhttd.devtest.data.entity;
 
 import com.google.gson.annotations.SerializedName;
 

@@ -8,14 +8,13 @@ import androidx.lifecycle.MutableLiveData;
 import com.ninhttd.devtest.TekoApplication;
 import com.ninhttd.devtest.base.BaseViewModel;
 import com.ninhttd.devtest.data.dto.ResponseDTO;
-import com.ninhttd.devtest.data.repository.TekoRepository;
-import com.ninhttd.devtest.presentation.product.model.Product;
-import com.ninhttd.devtest.presentation.product.model.ProductLevel2;
+import com.ninhttd.devtest.data.repository.ProductRepository;
+import com.ninhttd.devtest.data.entity.Product;
+import com.ninhttd.devtest.data.entity.ProductLevel2;
 import com.ninhttd.devtest.presentation.product.view.ProductView;
 
 import javax.inject.Inject;
 
-import io.reactivex.Scheduler;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.observers.DisposableSingleObserver;
 import io.reactivex.schedulers.Schedulers;
@@ -25,7 +24,7 @@ public class ProductDetailViewModel extends BaseViewModel<ProductView> {
     private static final String TAG = "ProductDetailViewModel";
 
     @Inject
-    TekoRepository tekoRepository;
+    ProductRepository productRepository;
 
     public MutableLiveData<ResponseDTO<Product>> productDetailLD = new MutableLiveData<>();
 
@@ -43,7 +42,7 @@ public class ProductDetailViewModel extends BaseViewModel<ProductView> {
         if (loading) {
             return;
         }
-        disposable.add(tekoRepository.getProductDetail(sku)
+        disposable.add(productRepository.getProductDetail(sku)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe(disposable1 -> {

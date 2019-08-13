@@ -8,11 +8,10 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ninhttd.devtest.R;
-import com.ninhttd.devtest.presentation.product.model.AttributeGroup;
+import com.ninhttd.devtest.data.entity.AttributeGroup;
 
 import java.util.List;
 

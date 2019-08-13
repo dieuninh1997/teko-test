@@ -11,8 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.ninhttd.devtest.R;
-import com.ninhttd.devtest.presentation.product.model.Image;
-import com.ninhttd.devtest.presentation.product.model.Product;
+import com.ninhttd.devtest.data.entity.Image;
 
 import java.util.List;
 

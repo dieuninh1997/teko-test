@@ -1,27 +1,28 @@
 package com.ninhttd.devtest.data.repository;
 
-import android.util.Log;
-
 import com.ninhttd.devtest.data.dto.ResponseDTO;
 import com.ninhttd.devtest.data.dto.ResponseListDTO;
+import com.ninhttd.devtest.data.local.TekoDb;
 import com.ninhttd.devtest.data.remote.TekoApi;
-import com.ninhttd.devtest.presentation.product.model.Product;
-import com.ninhttd.devtest.presentation.product.model.ProductLevel1;
-import com.ninhttd.devtest.presentation.product.model.ProductLevel2;
+import com.ninhttd.devtest.data.entity.Product;
+import com.ninhttd.devtest.data.entity.ProductLevel1;
+import com.ninhttd.devtest.data.entity.ProductLevel2;
+
+import java.util.List;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import io.reactivex.Single;
-import io.reactivex.disposables.Disposable;
 
 @Singleton
-public class TekoRepository {
-    private static final String TAG="TekoRepository";
+public class ProductRepository {
+    private static final String TAG = "ProductRepository";
     private TekoApi tekoApi;
+    private Product product;
 
     @Inject
-    public TekoRepository(TekoApi tekoApi) {
+    public ProductRepository(TekoApi tekoApi) {
         this.tekoApi = tekoApi;
     }
 
@@ -38,12 +39,16 @@ public class TekoRepository {
         return tekoApi.getProductList();
     }
 
-    public Single<ResponseDTO<ProductLevel1>> loadMore(int page)
-    {
+    public Single<ResponseDTO<ProductLevel1>> loadMore(int page) {
         return tekoApi.getProductList(page);
     }
 
     public Single<ResponseDTO<ProductLevel2>> getProductDetail(String sku) {
-        return tekoApi.getProductDetail(sku);
+        return  tekoApi.getProductDetail(sku);
     }
+
+    public List<Product> getProductListDb() {
+        return TekoDb.getTekoDb().productDao().getAll();
+    }
+
 }

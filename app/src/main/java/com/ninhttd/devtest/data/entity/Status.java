@@ -1,14 +1,22 @@
 
-package com.ninhttd.devtest.presentation.product.model;
+package com.ninhttd.devtest.data.entity;
+
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
 import com.google.gson.annotations.SerializedName;
 
 
 @SuppressWarnings("unused")
+@Entity
 public class Status {
 
+    @ColumnInfo
     @SerializedName("publish")
     private Boolean mPublish;
+
+    @PrimaryKey
     @SerializedName("sale")
     private String mSale;
 
