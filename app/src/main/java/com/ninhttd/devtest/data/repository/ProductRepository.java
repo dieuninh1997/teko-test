@@ -1,5 +1,8 @@
 package com.ninhttd.devtest.data.repository;
 
+import com.google.common.base.Predicate;
+import com.google.common.collect.Collections2;
+import com.google.common.collect.Lists;
 import com.ninhttd.devtest.data.dto.ResponseDTO;
 import com.ninhttd.devtest.data.dto.ResponseListDTO;
 import com.ninhttd.devtest.data.local.TekoDb;
@@ -8,7 +11,10 @@ import com.ninhttd.devtest.data.entity.Product;
 import com.ninhttd.devtest.data.entity.ProductLevel1;
 import com.ninhttd.devtest.data.entity.ProductLevel2;
 
+import org.checkerframework.checker.nullness.compatqual.NullableDecl;
+
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -68,7 +74,8 @@ public class ProductRepository {
     }
 
     public List<Product> search(String key) {
-        return tekoDb.productDao().search(key);
+        List<Product> searchResult = Lists.newArrayList(Collections2.filter(tekoDb.productDao().getAll(), input -> input.getDisplayName().toLowerCase().contains(key)));
+        return searchResult;
     }
 
 }

@@ -22,6 +22,7 @@ public abstract class TekoDb extends RoomDatabase {
     public static TekoDb getTekoDb() {
         if (db == null) {
             db = Room.databaseBuilder(TekoApplication.getAppContext(), TekoDb.class, DATABASE_NAME)
+                    .allowMainThreadQueries()
                     .setJournalMode(JournalMode.TRUNCATE)
                     .fallbackToDestructiveMigration()
                     .build();

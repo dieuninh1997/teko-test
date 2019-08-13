@@ -10,6 +10,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.SearchView;
@@ -48,6 +49,8 @@ public class ProductFragment extends BaseFragment implements View.OnClickListene
 
     @BindView(R.id.searchView)
     SearchView searchView;
+    @BindView(R.id.txt_no_results)
+    TextView txtNoResults;
 
     private List<Product> data = new ArrayList<>();
 
@@ -69,29 +72,23 @@ public class ProductFragment extends BaseFragment implements View.OnClickListene
         initScrollListener();
         productViewModel.getProductList();
 
-        productViewModel.search("ASUS");
+
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-
+                productViewModel.search(query);
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
+                productViewModel.search(newText);
                 return false;
             }
         });
 
     }
 
-
-
-    private ObservableSource<?> dataFromNetwork(String query) {
-        return Observable.just(true)
-                .delay(2, TimeUnit.SECONDS)
-                .map(value -> query);
-    }
 
     /**
      * Making notification bar transparent
@@ -159,8 +156,6 @@ public class ProductFragment extends BaseFragment implements View.OnClickListene
     public void onLoadDataSucces(ResponseDTO<ProductLevel1> responseDTO) {
         if (responseDTO != null) {
             List<Product> items = responseDTO.getResult().getProducts();
-
-
             Log.e(TAG, "List<Product> " + items);
             adapter.setData(items);
         } else {
@@ -191,8 +186,14 @@ public class ProductFragment extends BaseFragment implements View.OnClickListene
 
     @Override
     public void onSearch(List<Product> products) {
-        //
         adapter.setData(products);
         adapter.notifyDataSetChanged();
+        if(products.size()>0){
+            txtNoResults.setVisibility(View.GONE);
+            rvProduct.setVisibility(View.VISIBLE);
+        }else{
+            txtNoResults.setVisibility(View.VISIBLE);
+            rvProduct.setVisibility(View.GONE);
+        }
     }
 }
