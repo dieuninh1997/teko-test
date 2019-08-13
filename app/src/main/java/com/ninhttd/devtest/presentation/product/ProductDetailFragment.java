@@ -1,7 +1,6 @@
 package com.ninhttd.devtest.presentation.product;
 
 import android.os.Bundle;
-import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
@@ -18,7 +17,9 @@ import com.ninhttd.devtest.R;
 import com.ninhttd.devtest.base.BaseFragment;
 import com.ninhttd.devtest.data.dto.ResponseDTO;
 import com.ninhttd.devtest.presentation.product.adapter.ProductDetailSliderAdapter;
+import com.ninhttd.devtest.presentation.product.adapter.SpCungLoaiAdapter;
 import com.ninhttd.devtest.presentation.product.adapter.TabsAdapter;
+import com.ninhttd.devtest.presentation.product.model.AttributeGroup;
 import com.ninhttd.devtest.presentation.product.model.Image;
 import com.ninhttd.devtest.presentation.product.model.Product;
 import com.ninhttd.devtest.presentation.product.model.ProductLevel2;
@@ -38,6 +39,8 @@ public class ProductDetailFragment extends BaseFragment implements View.OnClickL
 
     @BindView(R.id.rv_slider)
     RecyclerView rvSlider;
+    @BindView(R.id.rv_sp_cung_loai)
+    RecyclerView rvSpcl;
 
     @BindView(R.id.tab_layout)
     TabLayout tabLayout;
@@ -65,35 +68,36 @@ public class ProductDetailFragment extends BaseFragment implements View.OnClickL
 
 
     TabsAdapter tabsAdapter;
+    SpCungLoaiAdapter spCungLoaiAdapter;
 
     ProductDetailViewModel productDetailViewModel;
     ProductDetailSliderAdapter sliderAdapter;
     List<Image> sliderImages = new ArrayList<>();
     Product productDetail;
+    List<AttributeGroup> attributeGroups;
 
     @Override
     protected void afterView() {
         imgBack.setOnClickListener(this);
-        tabsAdapter = new TabsAdapter(getContext(), getChildFragmentManager());
-        viewPager.setAdapter(tabsAdapter);
-        tabLayout.setupWithViewPager(viewPager, false);
-        tabLayout.getTabAt(1).select();
-
 
         productDetailViewModel = ViewModelProviders.of(getActivity()).get(ProductDetailViewModel.class);
         productDetailViewModel.setView(this);
+        Bundle arguments = getArguments();
+        String sku = arguments.getString(Constant.ViewParam.PRODUCT_SKU);
+        productDetailViewModel.getProductDetail(sku);
+
         sliderAdapter = new ProductDetailSliderAdapter(sliderImages, getActivity());
         rvSlider.setLayoutManager(new CustomLinearLayoutManager(getActivity(), RecyclerView.HORIZONTAL, false));
         rvSlider.setAdapter(sliderAdapter);
 
-        Bundle arguments = getArguments();
-        String sku = arguments.getString(Constant.ViewParam.PRODUCT_SKU);
-
-        productDetailViewModel.getProductDetail(sku);
-
         PagerSnapHelper snapHelper = new PagerSnapHelper();
         snapHelper.attachToRecyclerView(rvSlider);
         rvSlider.addItemDecoration(new CirclePagerIndicatorDecoration());
+
+        spCungLoaiAdapter=new SpCungLoaiAdapter();
+        rvSpcl.setLayoutManager(new LinearLayoutManager(getActivity(), RecyclerView.HORIZONTAL, false));
+        rvSpcl.setAdapter(spCungLoaiAdapter);
+
 
         //auto swipe slider
 //        final int speedScroll = 3000;
@@ -124,6 +128,13 @@ public class ProductDetailFragment extends BaseFragment implements View.OnClickL
 
     }
 
+    private void initTabs() {
+        tabsAdapter = new TabsAdapter(getContext(), getChildFragmentManager(), attributeGroups);
+        viewPager.setAdapter(tabsAdapter);
+        tabLayout.setupWithViewPager(viewPager, false);
+        tabLayout.getTabAt(1).select();
+    }
+
     @Override
     protected int getLayout() {
         return R.layout.fragment_item_product_detail;
@@ -152,6 +163,9 @@ public class ProductDetailFragment extends BaseFragment implements View.OnClickL
             sliderAdapter.setData(productDetail.getImages());
             sliderAdapter.notifyDataSetChanged();
 
+            attributeGroups = productDetail.getAttributeGroups();
+
+            initTabs();
             initView();
         } else {
             Log.e(TAG, "onLoadDataDetailSuccess: productResponseDTO is NULL");

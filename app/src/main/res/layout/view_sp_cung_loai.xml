@@ -18,7 +18,7 @@
         android:lineHeight="19dp"
         android:textColor="@color/darkGrey"
         android:textSize="14sp"
-        tools:text="Màn hình LCD 31.5" />
+        android:text="Màn hình LCD 31.5" />
 
     <TextView
         android:id="@+id/txt_spcl_sale_price"
@@ -28,7 +28,7 @@
         android:textColor="@color/tomato"
         android:textSize="12sp"
         android:textStyle="bold"
-        tools:text="8.790.000 đ" />
+        android:text="8.790.000 đ" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -45,7 +45,7 @@
             android:textColor="@color/coolGrey"
             android:textSize="12sp"
             android:textStyle="bold"
-            tools:text="10.970.000" />
+            android:text="10.970.000" />
 
         <TextView
             android:id="@+id/txt_spcl_giam_gia"
@@ -57,7 +57,7 @@
             android:textColor="@color/white"
             android:textSize="12sp"
             android:textStyle="bold"
-            tools:text="-20%" />
+            android:text="-20%" />
     </LinearLayout>
 
 </LinearLayout>
