@@ -21,16 +21,19 @@ import com.ninhttd.devtest.R;
 import com.ninhttd.devtest.TekoApplication;
 import com.ninhttd.devtest.base.BaseFragment;
 import com.ninhttd.devtest.data.dto.ResponseDTO;
-import com.ninhttd.devtest.presentation.product.adapter.ProductAdapter;
-import com.ninhttd.devtest.presentation.product.viewmodel.ProductViewModel;
 import com.ninhttd.devtest.data.entity.Product;
 import com.ninhttd.devtest.data.entity.ProductLevel1;
+import com.ninhttd.devtest.presentation.product.adapter.ProductAdapter;
 import com.ninhttd.devtest.presentation.product.view.ProductListView;
+import com.ninhttd.devtest.presentation.product.viewmodel.ProductViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
+import io.reactivex.Observable;
+import io.reactivex.ObservableSource;
 
 public class ProductFragment extends BaseFragment implements View.OnClickListener, ProductListView {
     private static final String TAG = "ProductFragment";
@@ -66,10 +69,11 @@ public class ProductFragment extends BaseFragment implements View.OnClickListene
         initScrollListener();
         productViewModel.getProductList();
 
-//        imgBack.setOnClickListener(this);
+        productViewModel.search("ASUS");
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
+
                 return false;
             }
 
@@ -78,6 +82,15 @@ public class ProductFragment extends BaseFragment implements View.OnClickListene
                 return false;
             }
         });
+
+    }
+
+
+
+    private ObservableSource<?> dataFromNetwork(String query) {
+        return Observable.just(true)
+                .delay(2, TimeUnit.SECONDS)
+                .map(value -> query);
     }
 
     /**
@@ -107,8 +120,6 @@ public class ProductFragment extends BaseFragment implements View.OnClickListene
                 if (linearLayoutManager != null && linearLayoutManager.findLastCompletelyVisibleItemPosition() == adapter.getItemCount() - 1) {
                     loadMore();
                 }
-
-
             }
         });
     }
@@ -148,6 +159,8 @@ public class ProductFragment extends BaseFragment implements View.OnClickListene
     public void onLoadDataSucces(ResponseDTO<ProductLevel1> responseDTO) {
         if (responseDTO != null) {
             List<Product> items = responseDTO.getResult().getProducts();
+
+
             Log.e(TAG, "List<Product> " + items);
             adapter.setData(items);
         } else {
@@ -174,5 +187,12 @@ public class ProductFragment extends BaseFragment implements View.OnClickListene
     @Override
     public void hideLoadingMore() {
         progressBar.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void onSearch(List<Product> products) {
+        //
+        adapter.setData(products);
+        adapter.notifyDataSetChanged();
     }
 }

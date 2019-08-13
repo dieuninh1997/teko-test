@@ -12,4 +12,7 @@ import java.util.List;
 public interface ProductDao extends BaseDao<Product> {
     @Query("select * from product")
     List<Product> getAll();
+
+    @Query("select * from product where mDisplayName like :key")
+    List<Product> search(String key);
 }

@@ -6,6 +6,7 @@ import android.content.Context;
 import com.google.gson.Gson;
 import com.ninhttd.devtest.BuildConfig;
 import com.ninhttd.devtest.TekoApplication;
+import com.ninhttd.devtest.data.local.TekoDb;
 import com.ninhttd.devtest.data.remote.TekoApi;
 import com.ninhttd.devtest.data.remote.interceptor.AuthInterceptor;
 import com.ninhttd.devtest.data.remote.interceptor.NetworkInterceptor;
@@ -123,6 +124,12 @@ public class AppModule {
     @Provides
     Gson provideGson() {
         return TekoApplication.gson;
+    }
+
+    @Singleton
+    @Provides
+    TekoDb provideTekoDb() {
+        return TekoDb.getTekoDb();
     }
 
 

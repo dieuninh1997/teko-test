@@ -14,16 +14,19 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import io.reactivex.Single;
+import io.reactivex.functions.Function;
 
 @Singleton
 public class ProductRepository {
     private static final String TAG = "ProductRepository";
     private TekoApi tekoApi;
+    private TekoDb tekoDb;
     private Product product;
 
     @Inject
-    public ProductRepository(TekoApi tekoApi) {
+    public ProductRepository(TekoApi tekoApi, TekoDb tekoDb) {
         this.tekoApi = tekoApi;
+        this.tekoDb = tekoDb;
     }
 
 
@@ -36,19 +39,36 @@ public class ProductRepository {
 
 
     public Single<ResponseDTO<ProductLevel1>> getProductList() {
-        return tekoApi.getProductList();
+        return tekoApi.getProductList().map(productLevel1ResponseDTO ->
+        {
+            saveProducts(productLevel1ResponseDTO.getResult().getProducts());
+            return productLevel1ResponseDTO;
+        });
     }
 
     public Single<ResponseDTO<ProductLevel1>> loadMore(int page) {
-        return tekoApi.getProductList(page);
+        return tekoApi.getProductList(page).map(
+                productLevel1ResponseDTO ->
+                {
+                    saveProducts(productLevel1ResponseDTO.getResult().getProducts());
+                    return productLevel1ResponseDTO;
+                });
+    }
+
+    public void saveProducts(List<Product> products) {
+        tekoDb.productDao().save(products);
     }
 
     public Single<ResponseDTO<ProductLevel2>> getProductDetail(String sku) {
-        return  tekoApi.getProductDetail(sku);
+        return tekoApi.getProductDetail(sku);
     }
 
     public List<Product> getProductListDb() {
-        return TekoDb.getTekoDb().productDao().getAll();
+        return tekoDb.productDao().getAll();
+    }
+
+    public List<Product> search(String key) {
+        return tekoDb.productDao().search(key);
     }
 
 }
