@@ -10,6 +10,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
+import android.widget.SearchView;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModelProviders;
@@ -42,6 +43,9 @@ public class ProductFragment extends BaseFragment implements View.OnClickListene
     @BindView(R.id.img_back)
     ImageButton imgBack;
 
+    @BindView(R.id.searchView)
+    SearchView searchView;
+
     private List<Product> data = new ArrayList<>();
 
     ProductViewModel productViewModel;
@@ -63,6 +67,17 @@ public class ProductFragment extends BaseFragment implements View.OnClickListene
         productViewModel.getProductList();
 
 //        imgBack.setOnClickListener(this);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
     }
 
     /**

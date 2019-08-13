@@ -24,7 +24,7 @@ public class SpCungLoaiAdapter extends RecyclerView.Adapter<SpCungLoaiAdapter.Vi
 
     @Override
     public int getItemCount() {
-        return 3;
+        return 5;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

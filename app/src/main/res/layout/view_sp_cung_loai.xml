@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="150dp"
     android:layout_height="match_parent"
+    android:layout_marginLeft="12dp"
     android:background="@color/white"
     android:orientation="vertical">
 
@@ -16,19 +17,19 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:lineHeight="19dp"
+        android:text="Màn hình LCD 31.5"
         android:textColor="@color/darkGrey"
-        android:textSize="14sp"
-        android:text="Màn hình LCD 31.5" />
+        android:textSize="14sp" />
 
     <TextView
         android:id="@+id/txt_spcl_sale_price"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:lineHeight="19dp"
+        android:text="8.790.000 đ"
         android:textColor="@color/tomato"
-        android:textSize="12sp"
-        android:textStyle="bold"
-        android:text="8.790.000 đ" />
+        android:textSize="14sp"
+        android:textStyle="bold" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -42,10 +43,10 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="4dp"
             android:lineHeight="16dp"
+            android:text="10.970.000"
             android:textColor="@color/coolGrey"
             android:textSize="12sp"
-            android:textStyle="bold"
-            android:text="10.970.000" />
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/txt_spcl_giam_gia"
@@ -54,10 +55,10 @@
             android:background="@drawable/bg_rounded_2dp_gradient"
             android:lineHeight="16dp"
             android:padding="2dp"
+            android:text="-20%"
             android:textColor="@color/white"
             android:textSize="12sp"
-            android:textStyle="bold"
-            android:text="-20%" />
+            android:textStyle="bold" />
     </LinearLayout>
 
 </LinearLayout>
