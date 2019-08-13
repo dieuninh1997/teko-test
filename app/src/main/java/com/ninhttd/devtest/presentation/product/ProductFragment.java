@@ -31,6 +31,7 @@ import com.ninhttd.devtest.presentation.product.viewmodel.ProductViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
 
@@ -47,6 +48,7 @@ public class ProductFragment extends BaseFragment implements View.OnClickListene
 
     @BindView(R.id.searchView)
     SearchView searchView;
+
     @BindView(R.id.txt_no_results)
     TextView txtNoResults;
 
@@ -68,17 +70,16 @@ public class ProductFragment extends BaseFragment implements View.OnClickListene
         initScrollListener();
         productViewModel.getProductList();
 
-
+        productViewModel.search("ASUS");
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                productViewModel.search(query);
+
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                productViewModel.search(newText);
                 return false;
             }
         });
@@ -152,7 +153,6 @@ public class ProductFragment extends BaseFragment implements View.OnClickListene
     public void onLoadDataSucces(ResponseDTO<ProductLevel1> responseDTO) {
         if (responseDTO != null) {
             List<ProductEntity> items = responseDTO.getResult().getProductEntities();
-            Log.e(TAG, "List<ProductEntity> " + items);
             adapter.setData(items);
         } else {
             Log.e(TAG, "responseListDTO is NULL");
@@ -191,5 +191,6 @@ public class ProductFragment extends BaseFragment implements View.OnClickListene
             txtNoResults.setVisibility(View.VISIBLE);
             rvProduct.setVisibility(View.GONE);
         }
+
     }
 }

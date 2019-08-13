@@ -9,6 +9,7 @@ import com.ninhttd.devtest.data.entity.ProductLevel2;
 import com.ninhttd.devtest.data.local.TekoDb;
 import com.ninhttd.devtest.data.remote.TekoApi;
 
+
 import java.util.List;
 
 import javax.inject.Inject;
@@ -60,6 +61,7 @@ public class ProductRepository {
     public List<ProductEntity> search(String key) {
         List<ProductEntity> searchResult = Lists.newArrayList(Collections2.filter(tekoDb.productDao().getAll(), input -> input.getDisplayName().toLowerCase().contains(key)));
         return searchResult;
+
     }
 
 }
