@@ -11,7 +11,7 @@ import com.google.gson.annotations.SerializedName;
 import java.util.ArrayList;
 
 @Entity
-public class Product {
+public class ProductEntity {
     @ColumnInfo
     @SerializedName("allActiveFlashSales")
     private ArrayList<ActiveFlashSale> mAllActiveFlashSales;

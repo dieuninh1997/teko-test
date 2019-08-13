@@ -9,7 +9,7 @@ import com.ninhttd.devtest.TekoApplication;
 import com.ninhttd.devtest.base.BaseViewModel;
 import com.ninhttd.devtest.data.dto.ResponseDTO;
 import com.ninhttd.devtest.data.repository.ProductRepository;
-import com.ninhttd.devtest.data.entity.Product;
+import com.ninhttd.devtest.data.entity.ProductEntity;
 import com.ninhttd.devtest.data.entity.ProductLevel2;
 import com.ninhttd.devtest.presentation.product.view.ProductView;
 
@@ -26,7 +26,7 @@ public class ProductDetailViewModel extends BaseViewModel<ProductView> {
     @Inject
     ProductRepository productRepository;
 
-    public MutableLiveData<ResponseDTO<Product>> productDetailLD = new MutableLiveData<>();
+    public MutableLiveData<ResponseDTO<ProductEntity>> productDetailLD = new MutableLiveData<>();
 
 
     @Inject

@@ -17,11 +17,6 @@ public class LogUtils {
         }
     }
 
-    public static void infoLog(final Object target, final String content) {
-        String name = target != null ? target.getClass().getSimpleName() : "";
-        Log.i(PREFIX_TAG + name, StringUtils.isEmpty(content) ? "[Log is empty]" : content);
-    }
-
     public static void errorLog(final Object target, final String content) {
         Log.i(PREFIX_TAG + target.getClass().getSimpleName(), StringUtils.isEmpty(content) ? "[Log is empty]" : content);
     }

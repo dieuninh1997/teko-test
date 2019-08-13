@@ -42,12 +42,4 @@ public abstract class BaseActivity extends AppCompatActivity {
             getSupportFragmentManager().popBackStack();
         }
     }
-
-    public void showDialogLoading(){
-        DialogUtil.getInstance(this).showDialogLoading();
-    }
-
-    public void hideDialogLoading(){
-        DialogUtil.getInstance(this).dismissDialog();
-    }
 }

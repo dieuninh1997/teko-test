@@ -10,11 +10,6 @@ public class DialogActionImpl implements DialogAction {
     }
 
     @Override
-    public void actionForCancel() {
-
-    }
-
-    @Override
     public void execute(Context context) {
 
     }

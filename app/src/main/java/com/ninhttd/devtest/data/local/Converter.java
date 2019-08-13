@@ -24,7 +24,6 @@ import com.ninhttd.devtest.data.entity.Warranty;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 
 public class Converter {
     private static Gson gson = new Gson();

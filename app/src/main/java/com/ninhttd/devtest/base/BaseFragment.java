@@ -73,14 +73,6 @@ public abstract class BaseFragment extends Fragment implements BaseView {
         }
     }
 
-    public void showDialogLoading() {
-        DialogUtil.getInstance(getContext()).showDialogLoading();
-    }
-
-    public void hideDialogLoading() {
-        DialogUtil.getInstance(getContext()).dismissDialog();
-    }
-
     @Override
     public void onErrorAPI(ErrorDTO errorDTO) {
         String messageKey = "";

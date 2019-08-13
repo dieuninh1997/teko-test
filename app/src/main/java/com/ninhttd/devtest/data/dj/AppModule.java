@@ -15,9 +15,7 @@ import java.security.cert.CertificateException;
 import java.util.concurrent.TimeUnit;
 
 import javax.inject.Singleton;
-import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.SSLContext;
-import javax.net.ssl.SSLSession;
 import javax.net.ssl.SSLSocketFactory;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
@@ -58,7 +56,6 @@ public class AppModule {
         OkHttpClient.Builder httpClient = new OkHttpClient.Builder()
                 .addInterceptor(new NetworkInterceptor())
                 .addInterceptor(new AuthInterceptor())
-//                .addInterceptor(new ResponseInterceptor())
                 .addInterceptor(logging)
                 .connectTimeout(TIME_OUT, TimeUnit.SECONDS)
                 .readTimeout(TIME_OUT, TimeUnit.SECONDS)
@@ -100,14 +97,11 @@ public class AppModule {
 
             OkHttpClient.Builder builder = new OkHttpClient.Builder();
             builder.sslSocketFactory(sslSocketFactory, (X509TrustManager) trustAllCerts[0]);
-            builder.hostnameVerifier(new HostnameVerifier() {
-                @Override
-                public boolean verify(String hostname, SSLSession session) {
-                    return true;
-                }
-            });
+            builder.hostnameVerifier((hostname, session) -> true);
             builder.readTimeout(45, TimeUnit.SECONDS);
             builder.connectTimeout(2, TimeUnit.MINUTES);
+
+
             HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
             if (BuildConfig.DEBUG) {
                 logging.setLevel(HttpLoggingInterceptor.Level.BODY);

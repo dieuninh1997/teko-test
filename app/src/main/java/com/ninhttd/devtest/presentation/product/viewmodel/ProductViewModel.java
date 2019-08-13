@@ -10,7 +10,7 @@ import com.ninhttd.devtest.TekoApplication;
 import com.ninhttd.devtest.base.BaseViewModel;
 import com.ninhttd.devtest.data.dto.ExtraDTO;
 import com.ninhttd.devtest.data.dto.ResponseDTO;
-import com.ninhttd.devtest.data.entity.Product;
+import com.ninhttd.devtest.data.entity.ProductEntity;
 import com.ninhttd.devtest.data.repository.ProductRepository;
 import com.ninhttd.devtest.presentation.product.view.ProductListView;
 import com.ninhttd.devtest.data.entity.ProductLevel1;
@@ -116,7 +116,7 @@ public class ProductViewModel extends BaseViewModel<ProductListView> {
     }
 
     public void search(String key){
-        List<Product> products = productRepository.search(key);
-        view.onSearch(products);
+        List<ProductEntity> productEntities = productRepository.search(key);
+        view.onSearch(productEntities);
     }
 }

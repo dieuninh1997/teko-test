@@ -16,12 +16,12 @@ import com.google.android.material.tabs.TabLayout;
 import com.ninhttd.devtest.R;
 import com.ninhttd.devtest.base.BaseFragment;
 import com.ninhttd.devtest.data.dto.ResponseDTO;
+import com.ninhttd.devtest.data.entity.ProductEntity;
 import com.ninhttd.devtest.presentation.product.adapter.ProductDetailSliderAdapter;
 import com.ninhttd.devtest.presentation.product.adapter.SpCungLoaiAdapter;
 import com.ninhttd.devtest.presentation.product.adapter.TabsAdapter;
 import com.ninhttd.devtest.data.entity.AttributeGroup;
 import com.ninhttd.devtest.data.entity.Image;
-import com.ninhttd.devtest.data.entity.Product;
 import com.ninhttd.devtest.data.entity.ProductLevel2;
 import com.ninhttd.devtest.presentation.product.view.ProductView;
 import com.ninhttd.devtest.presentation.product.viewmodel.ProductDetailViewModel;
@@ -73,7 +73,7 @@ public class ProductDetailFragment extends BaseFragment implements View.OnClickL
     ProductDetailViewModel productDetailViewModel;
     ProductDetailSliderAdapter sliderAdapter;
     List<Image> sliderImages = new ArrayList<>();
-    Product productDetail;
+    ProductEntity productEntityDetail;
     List<AttributeGroup> attributeGroups;
 
     @Override
@@ -159,11 +159,11 @@ public class ProductDetailFragment extends BaseFragment implements View.OnClickL
     @Override
     public void onLoadDataDetailSuccess(ResponseDTO<ProductLevel2> productResponseDTO) {
         if (productResponseDTO != null) {
-            productDetail = productResponseDTO.getResult().getProduct();
-            sliderAdapter.setData(productDetail.getImages());
+            productEntityDetail = productResponseDTO.getResult().getProductEntity();
+            sliderAdapter.setData(productEntityDetail.getImages());
             sliderAdapter.notifyDataSetChanged();
 
-            attributeGroups = productDetail.getAttributeGroups();
+            attributeGroups = productEntityDetail.getAttributeGroups();
 
             initTabs();
             initView();
@@ -173,9 +173,9 @@ public class ProductDetailFragment extends BaseFragment implements View.OnClickL
     }
 
     private void initView() {
-        txtTitleHeader.setText(productDetail.getDisplayName());
-        String priceHeader = productDetail.getPrice().getSupplierSalePrice() != null ? productDetail.getPrice().getSupplierSalePrice().toString() : "";
-        String sellPrice = productDetail.getPrice().getSellPrice() != null ? productDetail.getPrice().getSellPrice().toString() : "";
+        txtTitleHeader.setText(productEntityDetail.getDisplayName());
+        String priceHeader = productEntityDetail.getPrice().getSupplierSalePrice() != null ? productEntityDetail.getPrice().getSupplierSalePrice().toString() : "";
+        String sellPrice = productEntityDetail.getPrice().getSellPrice() != null ? productEntityDetail.getPrice().getSellPrice().toString() : "";
         boolean isGiamGia = priceHeader.equals(sellPrice);
 
         if (priceHeader.isEmpty()) {
@@ -185,14 +185,14 @@ public class ProductDetailFragment extends BaseFragment implements View.OnClickL
             txtPriceHeader.setText(priceHeader);
 
         }
-        txtDisplayName.setText(productDetail.getDisplayName());
+        txtDisplayName.setText(productEntityDetail.getDisplayName());
 
-        txtMaSp.setText(productDetail.getSku());
-        if (productDetail.getStatus().getSale().isEmpty()) {
+        txtMaSp.setText(productEntityDetail.getSku());
+        if (productEntityDetail.getStatus().getSale().isEmpty()) {
             txtStatus.setVisibility(View.GONE);
         } else {
             txtStatus.setVisibility(View.VISIBLE);
-            txtStatus.setText(productDetail.getStatus().getSale());
+            txtStatus.setText(productEntityDetail.getStatus().getSale());
         }
         txtSalePrice.setText(priceHeader);
         txtSellPrice.setText(sellPrice);

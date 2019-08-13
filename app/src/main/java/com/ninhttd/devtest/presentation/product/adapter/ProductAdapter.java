@@ -14,8 +14,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.ninhttd.devtest.R;
+import com.ninhttd.devtest.data.entity.ProductEntity;
 import com.ninhttd.devtest.presentation.product.ProductDetailFragment;
-import com.ninhttd.devtest.data.entity.Product;
 import com.ninhttd.devtest.utils.Constant;
 import com.ninhttd.devtest.utils.Navigator;
 
@@ -26,11 +26,11 @@ import butterknife.ButterKnife;
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHolder> {
     private static final String TAG = "ProductAdapter";
-    List<Product> data;
+    List<ProductEntity> data;
     FragmentActivity fragmentActivity;
 
 
-    public ProductAdapter(List<Product> data, FragmentActivity fragmentActivity) {
+    public ProductAdapter(List<ProductEntity> data, FragmentActivity fragmentActivity) {
         this.data = data;
         this.fragmentActivity = fragmentActivity;
     }
@@ -45,7 +45,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         if (data.size() > 0) {
-            Product item = data.get(position);
+            ProductEntity item = data.get(position);
             if (item != null) {
                 String salePrice = item.getPrice().getSupplierSalePrice() != null ? item.getPrice().getSupplierSalePrice().toString() : "";
                 String sellPrice = item.getPrice().getSellPrice() != null ? item.getPrice().getSellPrice().toString() : "";
@@ -81,10 +81,10 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         return data.size();
     }
 
-    public void appendData(List<Product> products) {
+    public void appendData(List<ProductEntity> productEntities) {
         int beforeSize = data.size();
-        data.addAll(products);
-        notifyItemRangeInserted(beforeSize - 1, products.size());
+        data.addAll(productEntities);
+        notifyItemRangeInserted(beforeSize - 1, productEntities.size());
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -105,11 +105,11 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         }
     }
 
-    public List<Product> getData() {
+    public List<ProductEntity> getData() {
         return data;
     }
 
-    public void setData(List<Product> data) {
+    public void setData(List<ProductEntity> data) {
         this.data = data;
         notifyDataSetChanged();
     }

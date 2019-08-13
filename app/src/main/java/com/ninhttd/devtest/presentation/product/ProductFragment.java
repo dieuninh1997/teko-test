@@ -22,7 +22,7 @@ import com.ninhttd.devtest.R;
 import com.ninhttd.devtest.TekoApplication;
 import com.ninhttd.devtest.base.BaseFragment;
 import com.ninhttd.devtest.data.dto.ResponseDTO;
-import com.ninhttd.devtest.data.entity.Product;
+import com.ninhttd.devtest.data.entity.ProductEntity;
 import com.ninhttd.devtest.data.entity.ProductLevel1;
 import com.ninhttd.devtest.presentation.product.adapter.ProductAdapter;
 import com.ninhttd.devtest.presentation.product.view.ProductListView;
@@ -30,11 +30,8 @@ import com.ninhttd.devtest.presentation.product.viewmodel.ProductViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
-import io.reactivex.Observable;
-import io.reactivex.ObservableSource;
 
 public class ProductFragment extends BaseFragment implements View.OnClickListener, ProductListView {
     private static final String TAG = "ProductFragment";
@@ -52,7 +49,7 @@ public class ProductFragment extends BaseFragment implements View.OnClickListene
     @BindView(R.id.txt_no_results)
     TextView txtNoResults;
 
-    private List<Product> data = new ArrayList<>();
+    private List<ProductEntity> data = new ArrayList<>();
 
     ProductViewModel productViewModel;
     ProductAdapter adapter;
@@ -60,8 +57,6 @@ public class ProductFragment extends BaseFragment implements View.OnClickListene
     @Override
     protected void afterView() {
         setStatusBarGradiant(getActivity());
-
-        showDialogLoading();
         productViewModel = ViewModelProviders.of(this.getActivity()).get(ProductViewModel.class);
         productViewModel.setView(this);
         adapter = new ProductAdapter(data, getActivity());
@@ -155,8 +150,8 @@ public class ProductFragment extends BaseFragment implements View.OnClickListene
     @Override
     public void onLoadDataSucces(ResponseDTO<ProductLevel1> responseDTO) {
         if (responseDTO != null) {
-            List<Product> items = responseDTO.getResult().getProducts();
-            Log.e(TAG, "List<Product> " + items);
+            List<ProductEntity> items = responseDTO.getResult().getProductEntities();
+            Log.e(TAG, "List<ProductEntity> " + items);
             adapter.setData(items);
         } else {
             Log.e(TAG, "responseListDTO is NULL");
@@ -171,7 +166,7 @@ public class ProductFragment extends BaseFragment implements View.OnClickListene
 
     @Override
     public void appendData(ResponseDTO<ProductLevel1> viewDTOResponseListDTO) {
-        adapter.appendData(viewDTOResponseListDTO.getResult().getProducts());
+        adapter.appendData(viewDTOResponseListDTO.getResult().getProductEntities());
     }
 
     @Override
@@ -185,10 +180,10 @@ public class ProductFragment extends BaseFragment implements View.OnClickListene
     }
 
     @Override
-    public void onSearch(List<Product> products) {
-        adapter.setData(products);
+    public void onSearch(List<ProductEntity> productEntities) {
+        adapter.setData(productEntities);
         adapter.notifyDataSetChanged();
-        if(products.size()>0){
+        if(productEntities.size()>0){
             txtNoResults.setVisibility(View.GONE);
             rvProduct.setVisibility(View.VISIBLE);
         }else{
