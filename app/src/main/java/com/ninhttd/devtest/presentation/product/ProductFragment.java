@@ -24,6 +24,7 @@ import com.ninhttd.devtest.base.BaseFragment;
 import com.ninhttd.devtest.data.dto.ResponseDTO;
 import com.ninhttd.devtest.data.entity.ProductEntity;
 import com.ninhttd.devtest.data.entity.ProductLevel1;
+import com.ninhttd.devtest.data.remote.exception.HandlerException;
 import com.ninhttd.devtest.presentation.product.adapter.ProductAdapter;
 import com.ninhttd.devtest.presentation.product.view.ProductListView;
 import com.ninhttd.devtest.presentation.product.viewmodel.ProductViewModel;
@@ -161,7 +162,7 @@ public class ProductFragment extends BaseFragment implements View.OnClickListene
 
     @Override
     public void onLoadDataFailed(Throwable e) {
-
+        HandlerException.showException(getContext(), e.getMessage());
     }
 
     @Override
