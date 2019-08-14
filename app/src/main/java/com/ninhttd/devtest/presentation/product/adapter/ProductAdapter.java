@@ -58,12 +58,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
                 holder.txtSalePrice.setText(salePrice);
                 holder.txtSellPrice.setText(sellPrice);
 
-                holder.lnParent.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        navigateToProductDetail(item.getSku());
-                    }
-                });
+                holder.lnParent.setOnClickListener(v -> navigateToProductDetail(item.getSku()));
             }
         }
     }
@@ -112,5 +107,9 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
     public void setData(List<ProductEntity> data) {
         this.data = data;
         notifyDataSetChanged();
+    }
+
+    public void updateSearch() {
+
     }
 }

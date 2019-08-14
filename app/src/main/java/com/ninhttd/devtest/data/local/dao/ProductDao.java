@@ -8,11 +8,16 @@ import com.ninhttd.devtest.data.entity.ProductEntity;
 
 import java.util.List;
 
+import io.reactivex.Single;
+
 @Dao
 public interface ProductDao extends BaseDao<ProductEntity> {
     @Query("select * from ProductEntity")
-    List<ProductEntity> getAll();
+    Single<List<ProductEntity>> getAll();
+
+    @Query("select * from ProductEntity")
+    List<ProductEntity> getAllNoThread();
 
     @Query("select * from ProductEntity where mDisplayName like :key")
-    List<ProductEntity> search(String key);
+    Single<List<ProductEntity>> search(String key);
 }

@@ -16,6 +16,7 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import io.reactivex.Single;
+import io.reactivex.functions.Function;
 
 @Singleton
 public class ProductRepository {
@@ -32,6 +33,7 @@ public class ProductRepository {
     public Single<ResponseDTO<ProductLevel1>> getProductList() {
         return tekoApi.getProductList().map(productLevel1ResponseDTO ->
         {
+
             saveProducts(productLevel1ResponseDTO.getResult().getProductEntities());
             return productLevel1ResponseDTO;
         });
@@ -54,14 +56,19 @@ public class ProductRepository {
         return tekoApi.getProductDetail(sku);
     }
 
-    public List<ProductEntity> getProductListDb() {
+    public Single<List<ProductEntity>> getProductListDb() {
         return tekoDb.productDao().getAll();
     }
 
-    public List<ProductEntity> search(String key) {
-        List<ProductEntity> searchResult = Lists.newArrayList(Collections2.filter(tekoDb.productDao().getAll(), input -> input.getDisplayName().toLowerCase().contains(key)));
-        return searchResult;
+    public Single<List<ProductEntity>> search1(String key) {
+        return tekoDb.productDao().getAll()
+                .map(productEntities -> Lists.newArrayList(Collections2.filter(productEntities, input -> input.getDisplayName().toLowerCase().contains(key))));
 
     }
+    public Single<List<ProductEntity>> search(String key) {
+        return tekoDb.productDao().search("%"+key+"%");
+
+    }
+
 
 }

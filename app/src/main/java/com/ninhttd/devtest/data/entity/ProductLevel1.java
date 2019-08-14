@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName;
 import java.util.List;
 
 public class ProductLevel1 {
-    @SerializedName("productEntities")
+    @SerializedName("products")
   public List<ProductEntity> productEntities;
 
     public List<ProductEntity> getProductEntities() {

@@ -4,6 +4,7 @@ import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Build;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -70,21 +71,32 @@ public class ProductFragment extends BaseFragment implements View.OnClickListene
         initScrollListener();
         productViewModel.getProductList();
 
-        productViewModel.search("ASUS");
+        
+
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-
+                productViewModel.search(query);
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
+                if (!TextUtils.isEmpty(newText)) {
+                    productViewModel.search(newText);
+                    productViewModel.searchMode = true;
+                }else{
+                    // TODO reset data without search
+                    productViewModel.searchMode = false;
+                    productViewModel.getProductList();
+                }
                 return false;
             }
         });
 
     }
+
+
 
 
     /**
@@ -184,10 +196,10 @@ public class ProductFragment extends BaseFragment implements View.OnClickListene
     public void onSearch(List<ProductEntity> productEntities) {
         adapter.setData(productEntities);
         adapter.notifyDataSetChanged();
-        if(productEntities.size()>0){
+        if (productEntities.size() > 0) {
             txtNoResults.setVisibility(View.GONE);
             rvProduct.setVisibility(View.VISIBLE);
-        }else{
+        } else {
             txtNoResults.setVisibility(View.VISIBLE);
             rvProduct.setVisibility(View.GONE);
         }

@@ -37,6 +37,7 @@ public class ProductViewModel extends BaseViewModel<ProductListView> {
     }
 
     boolean loading = false;
+    public boolean searchMode = false;
 
     public void getProductList() {
         if (loading) {
@@ -78,7 +79,7 @@ public class ProductViewModel extends BaseViewModel<ProductListView> {
     }
 
     public void loadMoreData() {
-        if (loading) {
+        if (loading || searchMode) {
             return;
         }
         if (page >= extraDTO.getPageSize()) {
@@ -115,8 +116,22 @@ public class ProductViewModel extends BaseViewModel<ProductListView> {
                 }));
     }
 
-    public void search(String key){
-        List<ProductEntity> productEntities = productRepository.search(key);
-        view.onSearch(productEntities);
+    public void search(String key) {
+        disposable.add(
+                productRepository.search(key).subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread()).subscribeWith(new DisposableSingleObserver<List<ProductEntity>>() {
+                    @Override
+                    public void onSuccess(List<ProductEntity> productEntities) {
+                        view.onSearch(productEntities);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        if (view != null) {
+                            view.onLoadDataFailed(e);
+                        }
+                    }
+                })
+        );
     }
 }
