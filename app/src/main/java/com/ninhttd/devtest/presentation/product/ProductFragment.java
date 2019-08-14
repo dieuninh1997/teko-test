@@ -98,7 +98,7 @@ public class ProductFragment extends BaseFragment implements View.OnClickListene
 //            }
 //        });
 
-        RxSearchView.queryTextChanges(searchView).filter(charSequence -> charSequence.length()>0).debounce(300, TimeUnit.MICROSECONDS)
+        RxSearchView.queryTextChanges(searchView).debounce(300, TimeUnit.MICROSECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(charSequence -> {
                     if (!TextUtils.isEmpty(charSequence)) {
