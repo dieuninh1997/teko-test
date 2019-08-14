@@ -3,7 +3,7 @@ package com.ninhttd.devtest.data.entity;
 import com.google.gson.annotations.SerializedName;
 
 public class ProductLevel2 {
-    @SerializedName("productEntity")
+    @SerializedName("product")
     public ProductEntity productEntity;
 
     public ProductEntity getProductEntity() {
