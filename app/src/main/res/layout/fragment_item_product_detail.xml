@@ -38,6 +38,7 @@
 
             <!--separator-->
             <View
+                android:id="@+id/rv_slider_separator"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="@color/paleGrey" />

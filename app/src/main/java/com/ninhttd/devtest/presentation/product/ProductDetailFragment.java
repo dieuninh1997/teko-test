@@ -40,6 +40,9 @@ public class ProductDetailFragment extends BaseFragment implements View.OnClickL
 
     @BindView(R.id.rv_slider)
     RecyclerView rvSlider;
+    @BindView(R.id.rv_slider_separator)
+    View rvSliderSeparator;
+
     @BindView(R.id.rv_sp_cung_loai)
     RecyclerView rvSpcl;
 
@@ -95,7 +98,7 @@ public class ProductDetailFragment extends BaseFragment implements View.OnClickL
         snapHelper.attachToRecyclerView(rvSlider);
         rvSlider.addItemDecoration(new CirclePagerIndicatorDecoration());
 
-        spCungLoaiAdapter=new SpCungLoaiAdapter();
+        spCungLoaiAdapter = new SpCungLoaiAdapter();
         rvSpcl.setLayoutManager(new LinearLayoutManager(getActivity(), RecyclerView.HORIZONTAL, false));
         rvSpcl.setAdapter(spCungLoaiAdapter);
 
@@ -161,8 +164,14 @@ public class ProductDetailFragment extends BaseFragment implements View.OnClickL
     public void onLoadDataDetailSuccess(ResponseDTO<ProductLevel2> productResponseDTO) {
         if (productResponseDTO != null) {
             productEntityDetail = productResponseDTO.getResult().getProductEntity();
-            sliderAdapter.setData(productEntityDetail.getImages());
-
+            if (productEntityDetail.getImages().size() > 0) {
+                sliderAdapter.setData(productEntityDetail.getImages());
+                rvSliderSeparator.setVisibility(View.VISIBLE);
+                rvSlider.setVisibility(View.VISIBLE);
+            }else{
+                rvSliderSeparator.setVisibility(View.GONE);
+                rvSlider.setVisibility(View.GONE);
+            }
 
             attributeGroups = productEntityDetail.getAttributeGroups();
 
