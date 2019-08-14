@@ -11,4 +11,5 @@
     <string name="bo_nho_dem">Bộ nhớ đệm</string>
     <string name="show_more">Hiển thị nhiều hơn</string>
     <string name="sp_cung_loai">Sản phẩm cùng loại</string>
+    <string name="no_result">No result</string>
 </resources>

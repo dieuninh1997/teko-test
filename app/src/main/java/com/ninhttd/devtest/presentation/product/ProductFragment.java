@@ -11,14 +11,15 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
+import android.widget.SearchView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.widget.SearchView;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.jakewharton.rxbinding3.widget.RxSearchView;
 import com.ninhttd.devtest.R;
 import com.ninhttd.devtest.TekoApplication;
 import com.ninhttd.devtest.base.BaseFragment;
@@ -35,6 +36,9 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Consumer;
+import io.reactivex.functions.Predicate;
 
 public class ProductFragment extends BaseFragment implements View.OnClickListener, ProductListView {
     private static final String TAG = "ProductFragment";
@@ -71,32 +75,43 @@ public class ProductFragment extends BaseFragment implements View.OnClickListene
         initScrollListener();
         productViewModel.getProductList();
 
-        
 
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                productViewModel.search(query);
-                return false;
-            }
 
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                if (!TextUtils.isEmpty(newText)) {
-                    productViewModel.search(newText);
-                    productViewModel.searchMode = true;
-                }else{
-                    // TODO reset data without search
-                    productViewModel.searchMode = false;
-                    productViewModel.getProductList();
-                }
-                return false;
-            }
-        });
+//        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+//            @Override
+//            public boolean onQueryTextSubmit(String query) {
+//                productViewModel.search(query);
+//                return false;
+//            }
+//
+//            @Override
+//            public boolean onQueryTextChange(String newText) {
+//                if (!TextUtils.isEmpty(newText)) {
+//                    productViewModel.search(newText);
+//                    productViewModel.searchMode = true;
+//                }else{
+//                    // TODO reset data without search
+//                    productViewModel.searchMode = false;
+//                    productViewModel.getProductList();
+//                }
+//                return false;
+//            }
+//        });
+
+        RxSearchView.queryTextChanges(searchView).filter(charSequence -> charSequence.length()>0).debounce(300, TimeUnit.MICROSECONDS)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(charSequence -> {
+                    if (!TextUtils.isEmpty(charSequence)) {
+                        productViewModel.search((String) charSequence);
+                        productViewModel.searchMode = true;
+                    }else{
+                        // TODO reset data without search
+                        productViewModel.searchMode = false;
+                        productViewModel.getProductList();
+                    }
+                });
 
     }
-
-
 
 
     /**
