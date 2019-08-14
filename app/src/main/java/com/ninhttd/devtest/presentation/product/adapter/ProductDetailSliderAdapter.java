@@ -20,7 +20,7 @@ import butterknife.ButterKnife;
 
 public class ProductDetailSliderAdapter extends RecyclerView.Adapter<ProductDetailSliderAdapter.ViewHolder> {
 
-    List<Image> data;
+    private List<Image> data;
     FragmentActivity fragmentActivity;
 
     public List<Image> getData() {
@@ -29,6 +29,7 @@ public class ProductDetailSliderAdapter extends RecyclerView.Adapter<ProductDeta
 
     public void setData(List<Image> data) {
         this.data = data;
+        notifyDataSetChanged();
     }
 
     public ProductDetailSliderAdapter(List<Image> data, FragmentActivity fragmentActivity) {

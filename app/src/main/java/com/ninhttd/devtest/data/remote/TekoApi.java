@@ -17,6 +17,6 @@ public interface TekoApi {
     @GET("search/?channel=pv_online&visitorId=&q=&terminal=CP01")
     Single<ResponseDTO<ProductLevel1>> getProductList(@Query("_page") int page);
 
-    @GET("productEntities/{product_sku}")
+    @GET("products/{product_sku}")
     Single<ResponseDTO<ProductLevel2>> getProductDetail(@Path("product_sku") String sku);
 }

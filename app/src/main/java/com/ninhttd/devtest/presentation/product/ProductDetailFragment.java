@@ -17,6 +17,7 @@ import com.ninhttd.devtest.R;
 import com.ninhttd.devtest.base.BaseFragment;
 import com.ninhttd.devtest.data.dto.ResponseDTO;
 import com.ninhttd.devtest.data.entity.ProductEntity;
+import com.ninhttd.devtest.data.remote.exception.HandlerException;
 import com.ninhttd.devtest.presentation.product.adapter.ProductDetailSliderAdapter;
 import com.ninhttd.devtest.presentation.product.adapter.SpCungLoaiAdapter;
 import com.ninhttd.devtest.presentation.product.adapter.TabsAdapter;
@@ -161,7 +162,7 @@ public class ProductDetailFragment extends BaseFragment implements View.OnClickL
         if (productResponseDTO != null) {
             productEntityDetail = productResponseDTO.getResult().getProductEntity();
             sliderAdapter.setData(productEntityDetail.getImages());
-            sliderAdapter.notifyDataSetChanged();
+
 
             attributeGroups = productEntityDetail.getAttributeGroups();
 
@@ -213,6 +214,6 @@ public class ProductDetailFragment extends BaseFragment implements View.OnClickL
 
     @Override
     public void onLoadDataDetailFailed(Throwable e) {
-
+        HandlerException.showException(getContext(), e.getMessage());
     }
 }
