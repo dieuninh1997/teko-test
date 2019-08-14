@@ -49,7 +49,7 @@ public class ProductDetailSliderAdapter extends RecyclerView.Adapter<ProductDeta
         if (data.size() > 0) {
             Image item = data.get(position);
             if (item.getUrl() != null) {
-                Glide.with(fragmentActivity.getApplicationContext()).load(item.getUrl()).into(holder.imgSlider);
+                Glide.with(fragmentActivity.getApplicationContext()).load(item.getUrl()).placeholder(R.drawable.img_place_holder).into(holder.imgSlider);
             }
         }
     }
