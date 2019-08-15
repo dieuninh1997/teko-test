@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 
 import com.ninhttd.devtest.TekoApplication;
 import com.ninhttd.devtest.base.BaseViewModel;
+import com.ninhttd.devtest.data.dto.CodeDTO;
 import com.ninhttd.devtest.data.dto.ExtraDTO;
 import com.ninhttd.devtest.data.dto.ResponseDTO;
 import com.ninhttd.devtest.data.entity.ProductEntity;
@@ -29,6 +30,7 @@ public class ProductViewModel extends BaseViewModel<ProductListView> {
     ProductRepository productRepository;
     int page = 0;
     ExtraDTO extraDTO;
+    CodeDTO codeDTO;
 
     @Inject
     public ProductViewModel(@NonNull Application application) {
@@ -67,6 +69,7 @@ public class ProductViewModel extends BaseViewModel<ProductListView> {
                             view.onLoadDataSucces(viewDTOResponseListDTO);
                         }
                         extraDTO = viewDTOResponseListDTO.getExtra();
+                        codeDTO = viewDTOResponseListDTO.getCode();
                     }
 
                     @Override

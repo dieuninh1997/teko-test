@@ -2,13 +2,26 @@ package com.ninhttd.devtest.data.dto;
 
 import com.google.gson.annotations.SerializedName;
 
-public class ResponseDTO<DTO> extends StatusDTO {
+import java.io.Serializable;
+
+public class ResponseDTO<DTO> implements Serializable {
     private String errors;
 
     private DTO result;
 
     @SerializedName("extra")
     private ExtraDTO extra;
+
+    @SerializedName("code")
+    private CodeDTO code;
+
+    public CodeDTO getCode() {
+        return code;
+    }
+
+    public void setCode(CodeDTO code) {
+        this.code = code;
+    }
 
     public void setErrors(String errors) {
         this.errors = errors;
