@@ -37,8 +37,6 @@ import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.functions.Consumer;
-import io.reactivex.functions.Predicate;
 
 public class ProductFragment extends BaseFragment implements View.OnClickListener, ProductListView {
     private static final String TAG = "ProductFragment";
@@ -76,7 +74,6 @@ public class ProductFragment extends BaseFragment implements View.OnClickListene
         productViewModel.getProductList();
 
 
-
 //        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
 //            @Override
 //            public boolean onQueryTextSubmit(String query) {
@@ -104,7 +101,7 @@ public class ProductFragment extends BaseFragment implements View.OnClickListene
                     if (!TextUtils.isEmpty(charSequence)) {
                         productViewModel.search((String) charSequence);
                         productViewModel.searchMode = true;
-                    }else{
+                    } else {
                         // TODO reset data without search
                         productViewModel.searchMode = false;
                         productViewModel.getProductList();
@@ -156,7 +153,6 @@ public class ProductFragment extends BaseFragment implements View.OnClickListene
 
     @Override
     protected void destroyView() {
-
     }
 
     @Override

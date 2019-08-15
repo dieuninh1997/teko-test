@@ -146,7 +146,6 @@ public class ProductDetailFragment extends BaseFragment implements View.OnClickL
 
     @Override
     protected void destroyView() {
-
     }
 
     @Override
