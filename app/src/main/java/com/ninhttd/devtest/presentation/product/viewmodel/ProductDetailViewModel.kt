@@ -1,6 +1,7 @@
 package com.ninhttd.devtest.presentation.product.viewmodel
 
 import android.app.Application
+import androidx.databinding.ObservableField
 import androidx.lifecycle.MutableLiveData
 
 import com.ninhttd.devtest.TekoApplication
@@ -23,6 +24,7 @@ class ProductDetailViewModel @Inject constructor(application: Application) : Bas
     lateinit var productRepository: ProductRepository
 
     var productDetailLD = MutableLiveData<ResponseDTO<ProductEntity>>()
+    var productEntity: ObservableField<ProductEntity> = ObservableField()
 
 
     var loading = false
@@ -49,6 +51,7 @@ class ProductDetailViewModel @Inject constructor(application: Application) : Bas
                 }
                 .subscribe({
                     view?.onLoadDataDetailSuccess(it)
+                    productEntity.set(it.result!!.productEntity)
                 }, {
                     view?.onLoadDataFailed(it)
                 }))

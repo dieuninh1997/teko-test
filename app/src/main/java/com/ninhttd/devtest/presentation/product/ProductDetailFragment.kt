@@ -1,94 +1,86 @@
 package com.ninhttd.devtest.presentation.product
 
 import android.os.Bundle
-import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.TextView
-
+import androidx.databinding.BindingAdapter
+import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.PagerSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.ViewPager
-
+import butterknife.BindView
 import com.google.android.material.tabs.TabLayout
-import com.ninhttd.devtest.R
 import com.ninhttd.devtest.base.BaseFragment
 import com.ninhttd.devtest.data.dto.ResponseDTO
+import com.ninhttd.devtest.data.entity.AttributeGroup
+import com.ninhttd.devtest.data.entity.Image
 import com.ninhttd.devtest.data.entity.ProductEntity
-import com.ninhttd.devtest.data.remote.exception.HandlerException
+import com.ninhttd.devtest.data.entity.ProductLevel2
+import com.ninhttd.devtest.databinding.FragmentItemProductDetailBinding
 import com.ninhttd.devtest.presentation.product.adapter.ProductDetailSliderAdapter
 import com.ninhttd.devtest.presentation.product.adapter.SpCungLoaiAdapter
 import com.ninhttd.devtest.presentation.product.adapter.TabsAdapter
-import com.ninhttd.devtest.data.entity.AttributeGroup
-import com.ninhttd.devtest.data.entity.Image
-import com.ninhttd.devtest.data.entity.ProductLevel2
 import com.ninhttd.devtest.presentation.product.view.ProductView
 import com.ninhttd.devtest.presentation.product.viewmodel.ProductDetailViewModel
 import com.ninhttd.devtest.utils.Constant
+import kotlinx.android.synthetic.main.fragment_item_product_detail.*
+import java.util.*
 
-import java.util.ArrayList
-
-import butterknife.BindView
 
 class ProductDetailFragment : BaseFragment(), View.OnClickListener, ProductView {
-    @BindView(R.id.img_back)
+    @BindView(com.ninhttd.devtest.R.id.img_back)
     @JvmField
     var imgBack: ImageButton? = null
 
-    @BindView(R.id.rv_slider)
+    @BindView(com.ninhttd.devtest.R.id.rv_slider)
     @JvmField
     var rvSlider: RecyclerView? = null
 
-    @BindView(R.id.rv_slider_separator)
+    @BindView(com.ninhttd.devtest.R.id.rv_slider_separator)
     @JvmField
     var rvSliderSeparator: View? = null
 
-    @BindView(R.id.rv_sp_cung_loai)
+    @BindView(com.ninhttd.devtest.R.id.rv_sp_cung_loai)
     @JvmField
     var rvSpcl: RecyclerView? = null
 
-    @BindView(R.id.tab_layout)
+    @BindView(com.ninhttd.devtest.R.id.tab_layout)
     @JvmField
     var tabLayout: TabLayout? = null
 
-    @BindView(R.id.view_pager)
+    @BindView(com.ninhttd.devtest.R.id.view_pager)
     @JvmField
     var viewPager: ViewPager? = null
 
     //view
-    @BindView(R.id.txt_title)
+    @BindView(com.ninhttd.devtest.R.id.txt_title)
     @JvmField
     var txtTitleHeader: TextView? = null
 
-    @BindView(R.id.txt_price)
+    @BindView(com.ninhttd.devtest.R.id.txt_price)
     @JvmField
     var txtPriceHeader: TextView? = null
 
-    @BindView(R.id.txt_display_name)
-    @JvmField
-    var txtDisplayName: TextView? = null
+//    @BindView(R.id.txt_status)
+//    @JvmField
+//    var txtStatus: TextView? = null
 
-    @BindView(R.id.txt_ma_sp)
-    @JvmField
-    var txtMaSp: TextView? = null
+//    @BindView(R.id.txt_sale_price)
+//    @JvmField
+//    var txtSalePrice: TextView? = null
+//
+//    @BindView(R.id.txt_sell_price)
+//    @JvmField
+//    var txtSellPrice: TextView? = null
 
-    @BindView(R.id.txt_status)
-    @JvmField
-    var txtStatus: TextView? = null
-
-    @BindView(R.id.txt_sale_price)
-    @JvmField
-    var txtSalePrice: TextView? = null
-
-    @BindView(R.id.txt_sell_price)
-    @JvmField
-    var txtSellPrice: TextView? = null
-
-    @BindView(R.id.txt_giam_gia)
-    @JvmField
-    var txtGiamGia: TextView? = null
+//    @BindView(R.id.txt_giam_gia)
+//    @JvmField
+//    var txtGiamGia: TextView? = null
 
 
     lateinit var tabsAdapter: TabsAdapter
@@ -101,12 +93,17 @@ class ProductDetailFragment : BaseFragment(), View.OnClickListener, ProductView 
     var attributeGroups: List<AttributeGroup>? = null
 
     protected override val layout: Int
-        get() = R.layout.fragment_item_product_detail
+        get() = com.ninhttd.devtest.R.layout.fragment_item_product_detail
+    lateinit var binding: FragmentItemProductDetailBinding
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        this.binding = DataBindingUtil.inflate(layoutInflater, com.ninhttd.devtest.R.layout.fragment_item_product_detail, container, false)
+        return binding.root
+    }
 
     override fun afterView() {
         imgBack!!.setOnClickListener(this)
-
         productDetailViewModel = ViewModelProviders.of(activity!!).get(ProductDetailViewModel::class.java)
+        binding.product = productDetailViewModel.productEntity
         productDetailViewModel.view = this
         val arguments = arguments
         val sku = arguments!!.getString(Constant.ViewParam.PRODUCT_SKU)
@@ -165,7 +162,7 @@ class ProductDetailFragment : BaseFragment(), View.OnClickListener, ProductView 
 
     override fun onClick(v: View) {
         when (v.id) {
-            R.id.img_back -> activity!!.supportFragmentManager.popBackStack()
+            com.ninhttd.devtest.R.id.img_back -> activity!!.supportFragmentManager.popBackStack()
             else -> {
             }
         }
@@ -201,27 +198,28 @@ class ProductDetailFragment : BaseFragment(), View.OnClickListener, ProductView 
             txtPriceHeader!!.text = priceHeader
 
         }
-        txtDisplayName!!.text = productEntityDetail.displayName
+//        txtDisplayName!!.text = productEntityDetail.displayName
 
-        txtMaSp!!.text = productEntityDetail.sku
         if (productEntityDetail.status!!.sale!!.isEmpty()) {
-            txtStatus!!.visibility = View.GONE
+            txt_status.visibility = View.GONE
+//            txtStatus!!.visibility = View.GONE
         } else {
-            txtStatus!!.visibility = View.VISIBLE
-            txtStatus!!.text = productEntityDetail.status!!.sale
+            txt_status.visibility = View.VISIBLE
+//            txtStatus!!.visibility = View.VISIBLE
+//            txtStatus!!.text = productEntityDetail.status!!.sale
         }
-        txtSalePrice!!.text = priceHeader
-        txtSellPrice!!.text = sellPrice
+//        txtSalePrice!!.text = priceHeader
+//        txtSellPrice!!.text = sellPrice
 
         if (!isGiamGia) {
             if (priceHeader != null && sellPrice != null && java.lang.Double.parseDouble(sellPrice) != 0.0) {
                 val giamGia = (1 - java.lang.Double.parseDouble(sellPrice) / java.lang.Double.parseDouble(priceHeader)) * 100
-                txtGiamGia!!.visibility = View.VISIBLE
-                txtGiamGia!!.text = "-" + giamGia.toInt() + "%"
+                txt_giam_gia.visibility = View.VISIBLE
+                txt_giam_gia.text = "-" + giamGia.toInt() + "%"
             }
         } else {
-            txtGiamGia!!.visibility = View.GONE
-            txtSalePrice!!.visibility = View.GONE
+            txt_giam_gia.visibility = View.GONE
+            txt_sale_price.visibility = View.GONE
         }
 
 

@@ -10,6 +10,14 @@ import com.google.gson.internal.bind.DateTypeAdapter
 import com.ninhttd.devtest.data.api.deserialized.DateDeSerialized
 import com.ninhttd.devtest.data.api.serialized.DateSerialized
 import java.util.*
+import androidx.databinding.adapters.TextViewBindingAdapter.setText
+import android.widget.TextView
+import androidx.databinding.BindingAdapter
+import androidx.databinding.InverseBindingAdapter
+
+
+
+
 
 @Entity
 class ProductEntity {
@@ -134,5 +142,6 @@ class ProductEntity {
 //    @SerializedName(value = "user",alternate = arrayOf("cusro","blo","bla"))
 //    @JsonAdapter(value = DateTypeAdapter::class,nullSafe = true)
 //    var date: Date? = null
+
 
 }
