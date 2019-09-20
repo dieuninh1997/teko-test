@@ -1,4 +1,7 @@
 apply plugin: 'com.android.application'
+apply plugin: "kotlin-android"
+apply plugin: "kotlin-android-extensions"
+apply plugin: "kotlin-kapt"
 
 android {
     compileSdkVersion 28
@@ -9,6 +12,7 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
     }
     buildTypes {
         release {
@@ -20,6 +24,10 @@ android {
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    dataBinding{
+        enabled=true
     }
 }
 
@@ -38,7 +46,7 @@ dependencies {
 
     /* Libraries for handle image  */
     implementation 'com.github.bumptech.glide:glide:4.9.0'
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.9.0'
+    kapt 'com.github.bumptech.glide:compiler:4.9.0'
 
     //    utils
     implementation 'joda-time:joda-time:2.10.1'
@@ -47,7 +55,7 @@ dependencies {
 
     /* Android Architecture Component - LiveData & ViewModel  */
     implementation "android.arch.lifecycle:extensions:1.1.1"
-    annotationProcessor "android.arch.lifecycle:compiler:1.1.1"
+    kapt "android.arch.lifecycle:compiler:1.1.1"
 
     /* Retrofit using RxJava2, Okhttp, Okhttp logging interceptor, Gson  */
     implementation "com.squareup.retrofit2:adapter-rxjava2:2.4.0"
@@ -60,15 +68,18 @@ dependencies {
 
     //    Dagger2
     implementation "com.google.dagger:dagger:2.15"
-    annotationProcessor "com.google.dagger:dagger-compiler:2.15"
+    kapt "com.google.dagger:dagger-compiler:2.15"
     implementation "com.google.dagger:dagger-android-support:2.15"
-    annotationProcessor "com.google.dagger:dagger-android-processor:2.15"
+    kapt "com.google.dagger:dagger-android-processor:2.15"
     implementation "com.google.dagger:dagger-android:2.15"
+
+    kapt 'com.google.dagger:dagger-android-processor:2.15'
+    kapt 'com.google.dagger:dagger-compiler:2.15'
 
 
     //lombok
     implementation 'org.projectlombok:lombok:1.18.8'
-    annotationProcessor 'org.projectlombok:lombok:1.18.8'
+    kapt 'org.projectlombok:lombok:1.18.8'
 
     //
     implementation 'com.google.code.gson:gson:2.8.2'
@@ -78,16 +89,16 @@ dependencies {
 
     //    butterknife
     implementation 'com.jakewharton:butterknife:10.1.0'
-    annotationProcessor 'com.jakewharton:butterknife-compiler:10.1.0'
+    kapt 'com.jakewharton:butterknife-compiler:10.1.0'
 
     //glide
     implementation 'com.github.bumptech.glide:glide:4.9.0'
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.9.0'
+    kapt 'com.github.bumptech.glide:compiler:4.9.0'
 
     /* Android Architecture Component - Room Persistance Lib  */
     def room_version = "2.2.0-alpha02"
     implementation "androidx.room:room-runtime:$room_version"
-    annotationProcessor "androidx.room:room-compiler:$room_version" // For Kotlin use kapt instead of annotationProcessor
+    kapt "androidx.room:room-compiler:$room_version" // For Kotlin use kapt instead of annotationProcessor
     implementation "androidx.room:room-ktx:$room_version"
     implementation "androidx.room:room-rxjava2:$room_version"
     implementation "androidx.room:room-guava:$room_version"
